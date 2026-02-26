@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProteinBlender 입문 튜토리얼</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --dim: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --orange: #d29922;
+    --purple: #bc8cff;
+    --red: #f85149;
+    --pink: #f778ba;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: clamp(15px, 1.6vw, 17px);
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(13,17,23,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0.6rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    overflow-x: auto;
+  }
+  nav .logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  nav a {
+    color: var(--dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--text); }
+
+  /* Hero */
+  .hero {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 2rem 3rem;
+    background: radial-gradient(ellipse at 50% 0%, rgba(88,166,255,0.08) 0%, transparent 70%);
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    color: var(--dim);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    max-width: 600px;
+  }
+  .hero .badges {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+
+  /* Sections */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+  section {
+    margin-top: 4rem;
+  }
+  section h2 {
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .step-num.s1 { background: rgba(88,166,255,0.15); color: var(--accent); }
+  .step-num.s2 { background: rgba(63,185,80,0.15); color: var(--green); }
+  .step-num.s3 { background: rgba(210,153,34,0.15); color: var(--orange); }
+  .step-num.s4 { background: rgba(188,140,255,0.15); color: var(--purple); }
+  .step-num.s5 { background: rgba(248,81,73,0.15); color: var(--red); }
+  .step-num.s6 { background: rgba(247,120,186,0.15); color: var(--pink); }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.8rem;
+    color: var(--text);
+  }
+  .card p, .card li {
+    color: var(--dim);
+    font-size: 0.95rem;
+  }
+  .card ul, .card ol {
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  .card li { margin-bottom: 0.4rem; }
+
+  /* Keyboard shortcuts */
+  kbd {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.82rem;
+    color: var(--text);
+    background: rgba(110,118,129,0.15);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-weight: 600;
+  }
+
+  /* Tip / Warning boxes */
+  .tip, .warn, .info {
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    font-size: 0.93rem;
+  }
+  .tip {
+    background: rgba(63,185,80,0.08);
+    border-left: 3px solid var(--green);
+  }
+  .tip::before { content: "TIP  "; font-weight: 700; color: var(--green); }
+  .warn {
+    background: rgba(210,153,34,0.08);
+    border-left: 3px solid var(--orange);
+  }
+  .warn::before { content: "NOTE  "; font-weight: 700; color: var(--orange); }
+  .info {
+    background: rgba(88,166,255,0.08);
+    border-left: 3px solid var(--accent);
+  }
+  .info::before { content: "INFO  "; font-weight: 700; color: var(--accent); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.92rem;
+  }
+  th {
+    text-align: left;
+    padding: 0.7rem 1rem;
+    background: rgba(88,166,255,0.06);
+    border-bottom: 2px solid var(--border);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--dim);
+  }
+  tr:hover td { background: rgba(88,166,255,0.03); }
+
+  /* Code */
+  code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    background: rgba(110,118,129,0.15);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.88em;
+    color: var(--orange);
+  }
+
+  /* Workflow diagram */
+  .workflow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.8rem;
+    margin: 1.5rem 0;
+  }
+  .wf-step {
+    text-align: center;
+    padding: 1.2rem 0.8rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    position: relative;
+  }
+  .wf-step .wf-icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
+  .wf-step .wf-label { font-size: 0.82rem; font-weight: 600; color: var(--dim); }
+  .wf-step::after {
+    content: "";
+    position: absolute;
+    right: -0.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0; height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 6px solid var(--border);
+  }
+  .wf-step:last-child::after { display: none; }
+
+  /* Practice section */
+  .practice {
+    background: linear-gradient(135deg, rgba(88,166,255,0.05), rgba(188,140,255,0.05));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+  .practice h3 {
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+  }
+  .practice ol {
+    padding-left: 1.5rem;
+    color: var(--dim);
+  }
+  .practice li { margin-bottom: 0.6rem; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--dim);
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* WIP Banner */
+  .wip-banner {
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(210,153,34,0.12),
+      rgba(210,153,34,0.12) 20px,
+      rgba(210,153,34,0.06) 20px,
+      rgba(210,153,34,0.06) 40px
+    );
+    border: 2px solid var(--orange);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin: 1.5rem auto;
+    max-width: 700px;
+    text-align: center;
+  }
+  .wip-banner .wip-title {
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    font-weight: 800;
+    color: var(--orange);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+  .wip-banner p {
+    color: var(--dim);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    nav { padding: 0.5rem 1rem; gap: 1rem; }
+    .container { padding: 0 1rem 4rem; }
+    .card { padding: 1.2rem; }
+    .workflow { grid-template-columns: repeat(3, 1fr); }
+    .wf-step::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">ProteinBlender Tutorial</span>
+  <a href="#overview">개요</a>
+  <a href="#step1">1. Import</a>
+  <a href="#step2">2. Visual</a>
+  <a href="#step3">3. Puppet</a>
+  <a href="#step4">4. Pose</a>
+  <a href="#step5">5. Keyframe</a>
+  <a href="#step6">6. Render</a>
+  <a href="#practice">실습</a>
+  <a href="#examples">예제 모음</a>
+  <a href="#scene">씬 세팅</a>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="wip-banner">
+    <div class="wip-title">WORK IN PROGRESS — 테스트 중</div>
+    <p>이 튜토리얼은 현재 작성 및 검증 중입니다. 내용이 수시로 변경될 수 있습니다.</p>
+  </div>
+  <h1>ProteinBlender 입문 가이드</h1>
+  <p>Blender에서 단백질 구조를 임포트하고, 시각화하고, 애니메이션을 만드는 과정을 단계별로 배워봅니다.</p>
+  <div class="badges">
+    <span class="badge">Blender 4.2+</span>
+    <span class="badge">MolecularNodes 기반</span>
+    <span class="badge">PDB / mmCIF 지원</span>
+    <span class="badge">macOS / Windows / Linux</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- Overview -->
+<section id="overview">
+  <h2>전체 워크플로</h2>
+  <p>ProteinBlender의 작업 흐름은 6단계로 나뉩니다. 순서대로 따라가면 첫 번째 단백질 애니메이션을 완성할 수 있습니다.</p>
+
+  <div class="workflow">
+    <div class="wf-step">
+      <div class="wf-icon">📥</div>
+      <div class="wf-label">Import</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-icon">🎨</div>
+      <div class="wf-label">Visual</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-icon">🤖</div>
+      <div class="wf-label">Puppet</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-icon">📸</div>
+      <div class="wf-label">Pose</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-icon">⏱️</div>
+      <div class="wf-label">Keyframe</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-icon">🎬</div>
+      <div class="wf-label">Render</div>
+    </div>
+  </div>
+
+  <div class="info">
+    ProteinBlender를 설치하면 Blender 실행 시 전용 워크스페이스가 자동으로 로드됩니다.
+    오른쪽 사이드바가 안 보이면 3D Viewport에서 <kbd>N</kbd> 키를 누르세요.
+  </div>
+</section>
+
+<!-- Step 1: Import -->
+<section id="step1">
+  <h2><span class="step-num s1">1</span> 단백질 구조 임포트</h2>
+
+  <p>Importer 패널에서 단백질 구조를 불러옵니다. 세 가지 방법이 있습니다.</p>
+
+  <table>
+    <tr><th>방법</th><th>입력</th><th>설명</th></tr>
+    <tr>
+      <td><strong>로컬 파일</strong></td>
+      <td><code>.pdb</code> / <code>.cif</code></td>
+      <td>폴더 아이콘 클릭 → 파일 선택. OpenFold3 결과 등 로컬 구조</td>
+    </tr>
+    <tr>
+      <td><strong>RCSB PDB</strong></td>
+      <td>4자리 PDB ID</td>
+      <td>예: <code>1CRN</code> (크램빈), <code>6LU7</code> (SARS-CoV-2 프로테아제)</td>
+    </tr>
+    <tr>
+      <td><strong>AlphaFold DB</strong></td>
+      <td>UniProt ID</td>
+      <td>AlphaFold 예측 구조를 직접 다운로드</td>
+    </tr>
+  </table>
+
+  <div class="card">
+    <h3>따라하기</h3>
+    <ol>
+      <li>사이드바의 <strong>Importer</strong> 탭 클릭</li>
+      <li>PDB ID 입력란에 <code>1CRN</code> 입력</li>
+      <li><strong>"Fetch from PDB"</strong> 클릭</li>
+      <li>3D 뷰포트에 Cartoon 스타일로 단백질이 나타남</li>
+    </ol>
+  </div>
+
+  <div class="tip">
+    처음 연습할 때는 <code>1CRN</code> (46 잔기, 아주 작음)이 가장 좋습니다.
+    큰 단백질 (1000+ 잔기)은 임포트에 30~60초 걸릴 수 있습니다.
+  </div>
+</section>
+
+<!-- Step 2: Visuals -->
+<section id="step2">
+  <h2><span class="step-num s2">2</span> 시각화 스타일 조정</h2>
+
+  <p><strong>Visual Setup</strong> 패널에서 색상과 분자 표현 방식을 바꿉니다.</p>
+
+  <table>
+    <tr><th>스타일</th><th>용도</th><th>적합한 상황</th></tr>
+    <tr>
+      <td><strong>Cartoon</strong></td>
+      <td>알파 헬릭스, 베타 시트 강조</td>
+      <td>논문/발표용 전체 구조 (기본값)</td>
+    </tr>
+    <tr>
+      <td><strong>Surface</strong></td>
+      <td>분자 표면, 결합 포켓 시각화</td>
+      <td>약물-단백질 상호작용 설명</td>
+    </tr>
+    <tr>
+      <td><strong>Ribbon</strong></td>
+      <td>간략한 백본 표시</td>
+      <td>큰 복합체의 간결한 표현</td>
+    </tr>
+    <tr>
+      <td><strong>Ball & Stick</strong></td>
+      <td>원자 수준 상세 표현</td>
+      <td>활성 부위, 리간드 강조</td>
+    </tr>
+    <tr>
+      <td><strong>Spheres</strong></td>
+      <td>공간 충전 모델</td>
+      <td>분자 크기/부피 비교</td>
+    </tr>
+  </table>
+
+  <div class="card">
+    <h3>따라하기</h3>
+    <ol>
+      <li><strong>Protein Outliner</strong>에서 색상을 바꿀 체인/도메인 선택</li>
+      <li><strong>Visual Setup</strong> 패널로 이동</li>
+      <li>컬러 피커에서 원하는 색상 선택</li>
+      <li><strong>"Apply Color"</strong> 클릭</li>
+      <li>표현 스타일 드롭다운에서 원하는 스타일 변경</li>
+    </ol>
+  </div>
+
+  <div class="tip">
+    도메인별로 다른 스타일을 적용할 수 있습니다.
+    예: 전체는 Cartoon, 활성 부위만 Ball &amp; Stick으로 표시.
+  </div>
+</section>
+
+<!-- Step 3: Puppets -->
+<section id="step3">
+  <h2><span class="step-num s3">3</span> Puppet 만들기 (그룹핑)</h2>
+
+  <p><strong>Puppet</strong>은 여러 체인/도메인을 하나로 묶어서 함께 움직이게 하는 그룹입니다. 애니메이션의 핵심 단위입니다.</p>
+
+  <div class="card">
+    <h3>따라하기</h3>
+    <ol>
+      <li><strong>Protein Outliner</strong>에서 묶고 싶은 체인/도메인의 체크박스 선택</li>
+      <li><strong>Protein Puppet Maker</strong> 패널 열기</li>
+      <li><strong>"Create New Puppet"</strong> 클릭</li>
+      <li>알아보기 쉬운 이름 입력 (예: <code>enzyme_A</code>)</li>
+    </ol>
+  </div>
+
+  <table>
+    <tr><th>조작</th><th>단축키</th><th>설명</th></tr>
+    <tr><td>이동 (Grab)</td><td><kbd>G</kbd></td><td>Puppet 선택 후 마우스로 위치 이동</td></tr>
+    <tr><td>회전 (Rotate)</td><td><kbd>R</kbd></td><td>Puppet 선택 후 회전</td></tr>
+    <tr><td>크기 (Scale)</td><td><kbd>S</kbd></td><td>Puppet 선택 후 크기 조절</td></tr>
+    <tr><td>축 제한</td><td><kbd>G</kbd>→<kbd>X</kbd>/<kbd>Y</kbd>/<kbd>Z</kbd></td><td>특정 축으로만 이동/회전 제한</td></tr>
+  </table>
+
+  <div class="warn">
+    각 체인/도메인은 하나의 Puppet에만 속할 수 있습니다.
+    Puppet에서 멤버를 빼려면 삭제 후 재생성해야 합니다.
+  </div>
+</section>
+
+<!-- Step 4: Poses -->
+<section id="step4">
+  <h2><span class="step-num s4">4</span> Pose 저장 (컨포메이션 스냅샷)</h2>
+
+  <p><strong>Pose</strong>는 Puppet들의 위치/회전/크기를 저장하는 스냅샷입니다. 서로 다른 생물학적 상태를 기록해 두었다가 전환할 수 있습니다.</p>
+
+  <div class="card">
+    <h3>따라하기</h3>
+    <ol>
+      <li>Puppet을 원하는 위치로 배치 (<kbd>G</kbd>, <kbd>R</kbd>, <kbd>S</kbd>)</li>
+      <li><strong>Pose Library</strong> 패널 열기</li>
+      <li><strong>"Create Pose"</strong> 클릭</li>
+      <li>이름 입력 (예: <code>Open_State</code>) → 포함할 Puppet 선택 → <strong>OK</strong></li>
+      <li>Puppet을 다른 위치로 이동 후 다시 <strong>"Create Pose"</strong> → <code>Closed_State</code></li>
+    </ol>
+  </div>
+
+  <table>
+    <tr><th>버튼</th><th>기능</th></tr>
+    <tr><td><strong>Apply</strong></td><td>저장된 Pose로 즉시 복원</td></tr>
+    <tr><td><strong>Capture</strong></td><td>현재 위치로 기존 Pose 업데이트 (덮어쓰기)</td></tr>
+    <tr><td><strong>Delete</strong></td><td>Pose 삭제 (Puppet은 유지됨)</td></tr>
+  </table>
+
+  <div class="tip">
+    생물학적 상태에 맞는 이름을 쓰세요: <code>ATP_Bound</code>, <code>Substrate_Free</code>, <code>Transition_State</code> 등.
+    Pose는 Blender 파일 안에 Scene별로 저장됩니다.
+  </div>
+</section>
+
+<!-- Step 5: Keyframes -->
+<section id="step5">
+  <h2><span class="step-num s5">5</span> 키프레임 애니메이션</h2>
+
+  <p>Pose 사이를 부드럽게 전환하는 애니메이션을 만듭니다. Blender가 키프레임 사이를 자동으로 보간합니다.</p>
+
+  <div class="card">
+    <h3>기본 애니메이션 만들기</h3>
+    <ol>
+      <li>타임라인에서 <strong>프레임 1</strong>로 이동</li>
+      <li>Puppet 선택 → 시작 위치(Pose) 배치</li>
+      <li><kbd>I</kbd> 키 → <strong>"Location Rotation Scale"</strong> 선택 → 키프레임 삽입</li>
+      <li>타임라인에서 <strong>프레임 60</strong>으로 이동</li>
+      <li>Puppet을 새 위치로 이동/회전</li>
+      <li><kbd>I</kbd> 키 → 다시 키프레임 삽입</li>
+      <li><kbd>Space</kbd>로 재생하여 결과 확인</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Pose 전환 애니메이션</h3>
+    <ol>
+      <li>프레임 1 → Pose Library에서 <code>Open_State</code> Apply → <kbd>I</kbd> 키프레임</li>
+      <li>프레임 60 → <code>Closed_State</code> Apply → <kbd>I</kbd> 키프레임</li>
+      <li>재생하면 열림→닫힘 구조 변화가 부드럽게 전환됨</li>
+    </ol>
+  </div>
+
+  <table>
+    <tr><th>키프레임 대상</th><th>설명</th></tr>
+    <tr><td>위치 / 회전 / 크기</td><td>Puppet의 3D 공간 이동</td></tr>
+    <tr><td>Pose 전환</td><td>서로 다른 컨포메이션 간 전환</td></tr>
+    <tr><td>색상 변화</td><td>시간에 따른 색상 전환 효과</td></tr>
+  </table>
+
+  <div class="info">
+    <strong>Graph Editor</strong> (<kbd>Shift</kbd>+<kbd>F6</kbd>): 보간 곡선 정밀 제어<br>
+    <strong>Dope Sheet</strong> (<kbd>Shift</kbd>+<kbd>F2</kbd>): 전체 키프레임 타임라인 관리
+  </div>
+</section>
+
+<!-- Step 6: Render -->
+<section id="step6">
+  <h2><span class="step-num s6">6</span> 렌더링 & 출력</h2>
+
+  <p>애니메이션이 완성되면 Blender의 렌더링 기능으로 영상을 출력합니다.</p>
+
+  <div class="card">
+    <h3>렌더링 설정</h3>
+    <ol>
+      <li><strong>Output Properties</strong> 탭 (프린터 아이콘)에서 해상도 설정
+        <ul>
+          <li>발표용: 1920 x 1080 (Full HD)</li>
+          <li>SNS/웹: 1280 x 720</li>
+        </ul>
+      </li>
+      <li><strong>Frame Range</strong>: Start = 1, End = 마지막 키프레임</li>
+      <li><strong>Output Format</strong>: FFmpeg Video → Container: MPEG-4</li>
+      <li>출력 경로 지정</li>
+      <li>메뉴 <strong>Render → Render Animation</strong> (<kbd>Ctrl</kbd>+<kbd>F12</kbd>)</li>
+    </ol>
+  </div>
+
+  <div class="tip">
+    프리뷰는 Render Engine을 <strong>EEVEE</strong>로, 최종본은 <strong>Cycles</strong>로 하면 품질과 속도를 균형 있게 조절할 수 있습니다.
+    Mac에서는 Metal GPU 가속이 Cycles에서 잘 작동합니다.
+  </div>
+</section>
+
+<!-- Blender 필수 단축키 -->
+<section id="shortcuts">
+  <h2>Blender 필수 단축키 요약</h2>
+  <table>
+    <tr><th>단축키</th><th>기능</th></tr>
+    <tr><td><kbd>N</kbd></td><td>사이드바 토글 (ProteinBlender 패널 표시)</td></tr>
+    <tr><td><kbd>G</kbd></td><td>이동 (Grab)</td></tr>
+    <tr><td><kbd>R</kbd></td><td>회전 (Rotate)</td></tr>
+    <tr><td><kbd>S</kbd></td><td>크기 조절 (Scale)</td></tr>
+    <tr><td><kbd>I</kbd></td><td>키프레임 삽입</td></tr>
+    <tr><td><kbd>Space</kbd></td><td>애니메이션 재생/정지</td></tr>
+    <tr><td>마우스 가운데 버튼</td><td>뷰포트 회전</td></tr>
+    <tr><td><kbd>Shift</kbd> + 가운데 버튼</td><td>뷰포트 이동 (팬)</td></tr>
+    <tr><td>스크롤 휠</td><td>줌 인/아웃</td></tr>
+    <tr><td><kbd>Numpad .</kbd></td><td>선택 객체에 뷰 맞추기</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td><td>되돌리기 (Undo)</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>F12</kbd></td><td>애니메이션 렌더링</td></tr>
+  </table>
+</section>
+
+<!-- Practice: First Animation -->
+<section id="practice">
+  <h2>실습 A: 첫 번째 단백질 애니메이션</h2>
+
+  <div class="practice">
+    <h3>예제 A-1: 크램빈(1CRN) 360도 회전</h3>
+    <p style="color:var(--dim); margin-bottom:1rem">난이도: 입문 &mdash; 소요시간: ~10분 &mdash; 크램빈은 46 잔기의 작은 단백질로 연습에 최적</p>
+    <ol>
+      <li><strong>임포트</strong>: Importer → PDB ID에 <code>1CRN</code> 입력 → Fetch from PDB</li>
+      <li><strong>색상 변경</strong>: Visual Setup에서 원하는 색상 선택 → Apply Color</li>
+      <li><strong>Puppet 생성</strong>: Outliner에서 체인 선택 → Create New Puppet → 이름: <code>crambin</code></li>
+      <li><strong>프레임 1</strong>: Puppet 선택 → <kbd>I</kbd> → Location Rotation Scale</li>
+      <li><strong>프레임 120</strong>으로 이동 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>360</code> 입력 → <kbd>Enter</kbd></li>
+      <li><kbd>I</kbd> → Location Rotation Scale (두 번째 키프레임)</li>
+      <li><kbd>Space</kbd>로 재생 → 360도 회전 확인!</li>
+      <li><strong>매끄러운 회전</strong>: Graph Editor 열기 (<kbd>Shift</kbd>+<kbd>F6</kbd>) → 회전 커브 선택 → <kbd>T</kbd> → Linear로 변경</li>
+    </ol>
+    <div class="tip" style="margin-top:1rem">
+      처음에는 Ease-In/Out 보간이 기본이라 시작과 끝이 느려집니다.
+      Linear로 바꾸면 일정한 속도로 회전합니다. 루프 영상에 적합합니다.
+    </div>
+  </div>
+
+  <div class="practice">
+    <h3>예제 A-2: 카메라 궤도 촬영 (Turntable)</h3>
+    <p style="color:var(--dim); margin-bottom:1rem">난이도: 입문 &mdash; 단백질은 고정, 카메라가 주위를 도는 영상. 논문 Supplementary Video에 자주 활용</p>
+    <ol>
+      <li><code>1CRN</code> 임포트 (위 예제와 동일)</li>
+      <li><strong>빈 오브젝트 추가</strong>: <kbd>Shift</kbd>+<kbd>A</kbd> → Empty → Plain Axes → 단백질 중심에 배치</li>
+      <li><strong>카메라 부모 설정</strong>: 카메라 선택 → <kbd>Shift</kbd>로 Empty도 추가 선택 → <kbd>Ctrl</kbd>+<kbd>P</kbd> → Object</li>
+      <li>카메라가 단백질을 바라보도록 위치/각도 조정
+        <ul>
+          <li>카메라 선택 → <kbd>Numpad 0</kbd>으로 카메라 뷰 확인</li>
+          <li><kbd>G</kbd> → <kbd>Z</kbd>로 높이, <kbd>G</kbd> → <kbd>Y</kbd>로 거리 조절</li>
+        </ul>
+      </li>
+      <li><strong>Empty 회전 애니메이션</strong>:
+        <ul>
+          <li>Empty 선택 → 프레임 1 → <kbd>I</kbd> → Rotation</li>
+          <li>프레임 120 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>360</code> → <kbd>Enter</kbd> → <kbd>I</kbd> → Rotation</li>
+        </ul>
+      </li>
+      <li>Graph Editor에서 Linear 보간으로 변경</li>
+      <li><kbd>Ctrl</kbd>+<kbd>F12</kbd>로 렌더링 → 카메라가 단백질 주위를 부드럽게 공전</li>
+    </ol>
+    <div class="warn" style="margin-top:1rem">
+      카메라가 단백질을 바라보게 하려면: 카메라 선택 → Object Constraint Properties (뼈 아이콘) → Add Constraint → <strong>Track To</strong> → Target을 단백질 또는 Empty로 설정
+    </div>
+  </div>
+</section>
+
+<!-- Examples -->
+<section id="examples">
+  <h2>실습 B: 실전 예제 모음</h2>
+  <p>다양한 단백질로 ProteinBlender의 기능을 익혀봅니다. 각 예제는 독립적으로 진행할 수 있습니다.</p>
+
+  <table>
+    <tr><th>예제</th><th>PDB ID</th><th>단백질</th><th>핵심 기능</th><th>난이도</th></tr>
+    <tr><td>B-1</td><td><code>1MBO</code></td><td>미오글로빈</td><td>단일 체인 + 리간드 (헴) 하이라이트</td><td>입문</td></tr>
+    <tr><td>B-2</td><td><code>2HHB</code></td><td>헤모글로빈</td><td>4개 체인 복합체 + 멀티 Puppet</td><td>초중급</td></tr>
+    <tr><td>B-3</td><td><code>6LU7</code></td><td>SARS-CoV-2 프로테아제</td><td>효소 활성 부위 줌인 애니메이션</td><td>초중급</td></tr>
+    <tr><td>B-4</td><td><code>6VYB</code></td><td>SARS-CoV-2 스파이크</td><td>대형 3량체 + 도메인 분리 애니메이션</td><td>중급</td></tr>
+    <tr><td>B-5</td><td>로컬 .pdb</td><td>OpenFold3 예측 구조</td><td>pLDDT 신뢰도 색상 + 논문 이미지</td><td>중급</td></tr>
+  </table>
+
+  <!-- Example B-1 -->
+  <div class="practice" style="margin-top:2rem">
+    <h3>예제 B-1: 미오글로빈 — 리간드 하이라이트</h3>
+    <p style="color:var(--dim); margin-bottom:1rem">헴(Heme) 그룹이 포함된 단일 체인 단백질. 리간드만 다른 스타일로 강조하는 법을 배웁니다.</p>
+    <ol>
+      <li><strong>임포트</strong>: PDB ID <code>1MBO</code> → Fetch from PDB</li>
+      <li><strong>전체 스타일</strong>: Visual Setup → <strong>Cartoon</strong> (기본) → 색상을 연한 파란색으로 설정</li>
+      <li><strong>헴 그룹 찾기</strong>: Protein Outliner에서 체인 구조를 확장 → 리간드/헤테로아톰(HEM) 도메인 확인</li>
+      <li><strong>리간드 스타일 변경</strong>:
+        <ul>
+          <li>HEM 도메인 선택</li>
+          <li>Visual Setup → <strong>Ball &amp; Stick</strong>으로 변경</li>
+          <li>색상을 빨간색 계열로 변경 → Apply Color</li>
+        </ul>
+      </li>
+      <li>결과: 단백질 전체는 파란 Cartoon, 헴만 빨간 Ball &amp; Stick으로 대비</li>
+    </ol>
+    <div class="tip" style="margin-top:1rem">
+      이 기법은 모든 단백질-리간드 복합체에 적용 가능합니다:
+      약물 분자, 보조 인자, 금속 이온 등을 다른 스타일로 구분하면 직관적인 이미지를 만들 수 있습니다.
+    </div>
+  </div>
+
+  <!-- Example B-2 -->
+  <div class="practice">
+    <h3>예제 B-2: 헤모글로빈 — 멀티 체인 복합체</h3>
+    <p style="color:var(--dim); margin-bottom:1rem">4개의 서브유닛(α2β2)을 각각 다른 색상으로 칠하고, 서브유닛 분리 애니메이션을 만듭니다.</p>
+    <ol>
+      <li><strong>임포트</strong>: PDB ID <code>2HHB</code> → Fetch from PDB</li>
+      <li><strong>체인별 색상 지정</strong>:
+        <table style="margin:0.5rem 0">
+          <tr><th>체인</th><th>서브유닛</th><th>추천 색상</th></tr>
+          <tr><td>A</td><td>α1</td><td>파란색 (#4A90D9)</td></tr>
+          <tr><td>B</td><td>β1</td><td>빨간색 (#D94A4A)</td></tr>
+          <tr><td>C</td><td>α2</td><td>하늘색 (#7AB8E0)</td></tr>
+          <tr><td>D</td><td>β2</td><td>분홍색 (#E07A7A)</td></tr>
+        </table>
+        Outliner에서 체인 하나씩 선택 → 색상 지정 → Apply Color
+      </li>
+      <li><strong>Puppet 4개 생성</strong>: 각 체인을 개별 Puppet으로 생성
+        <ul>
+          <li>Chain A 선택 → Create Puppet → <code>alpha1</code></li>
+          <li>Chain B 선택 → Create Puppet → <code>beta1</code></li>
+          <li>(C, D도 동일)</li>
+        </ul>
+      </li>
+      <li><strong>"조립된 상태" Pose 저장</strong>:
+        <ul>
+          <li>4개 Puppet 모두 현재 위치 그대로 유지</li>
+          <li>Pose Library → Create Pose → 이름: <code>Assembled</code></li>
+        </ul>
+      </li>
+      <li><strong>"분리된 상태" 만들기</strong>:
+        <ul>
+          <li>각 Puppet을 <kbd>G</kbd>로 바깥쪽으로 이동 (서로 떨어지게)</li>
+          <li><code>alpha1</code>: <kbd>G</kbd> → <kbd>X</kbd> → <code>-3</code> → <kbd>Enter</kbd></li>
+          <li><code>beta1</code>: <kbd>G</kbd> → <kbd>X</kbd> → <code>3</code> → <kbd>Enter</kbd></li>
+          <li><code>alpha2</code>: <kbd>G</kbd> → <kbd>Y</kbd> → <code>-3</code> → <kbd>Enter</kbd></li>
+          <li><code>beta2</code>: <kbd>G</kbd> → <kbd>Y</kbd> → <code>3</code> → <kbd>Enter</kbd></li>
+          <li>Pose Library → Create Pose → 이름: <code>Exploded</code></li>
+        </ul>
+      </li>
+      <li><strong>조립 애니메이션</strong>:
+        <ul>
+          <li>프레임 1: <code>Exploded</code> Pose Apply → 모든 Puppet 선택 → <kbd>I</kbd> → LocRotScale</li>
+          <li>프레임 90: <code>Assembled</code> Pose Apply → <kbd>I</kbd> → LocRotScale</li>
+          <li>프레임 90~150: 정지 상태 유지 (같은 키프레임 복사)</li>
+        </ul>
+      </li>
+      <li><kbd>Space</kbd>로 재생 → 4개 서브유닛이 날아와서 조립되는 애니메이션!</li>
+    </ol>
+  </div>
+
+  <!-- Example B-3 -->
+  <div class="practice">
+    <h3>예제 B-3: SARS-CoV-2 프로테아제 — 활성 부위 줌인</h3>
+    <p style="color:var(--dim); margin-bottom:1rem">효소의 전체 구조를 보여준 후 활성 부위로 카메라가 줌인하는 애니메이션.</p>
+    <ol>
+      <li><strong>임포트</strong>: PDB ID <code>6LU7</code> → Fetch from PDB</li>
+      <li><strong>시각화</strong>:
+        <ul>
+          <li>전체: Cartoon, 연한 회색 (#B0B0B0)</li>
+          <li>리간드(N3 억제제): Ball &amp; Stick, 노란색 (#FFD700)</li>
+          <li>활성 부위 잔기(His41, Cys145 근처 도메인): Cartoon, 초록색 (#50C878)</li>
+        </ul>
+      </li>
+      <li><strong>카메라 설정</strong>:
+        <ul>
+          <li>카메라를 전체 구조가 보이는 원거리 위치에 배치</li>
+          <li>프레임 1: 카메라 위치 키프레임 (<kbd>I</kbd> → Location)</li>
+        </ul>
+      </li>
+      <li><strong>줌인 카메라 이동</strong>:
+        <ul>
+          <li>프레임 60: 카메라를 활성 부위 근처로 이동 (<kbd>G</kbd>로 전진)</li>
+          <li>카메라 뷰(<kbd>Numpad 0</kbd>)에서 리간드가 화면 중앙에 크게 보이도록 조정</li>
+          <li><kbd>I</kbd> → Location 키프레임 삽입</li>
+        </ul>
+      </li>
+      <li>프레임 60~120: 줌인 상태에서 카메라를 약간 회전하여 활성 부위를 다양한 각도로 보여줌</li>
+      <li>Graph Editor에서 줌인 구간의 보간 곡선을 <strong>Ease-In</strong>으로 설정 → 자연스러운 감속</li>
+    </ol>
+    <div class="tip" style="margin-top:1rem">
+      <strong>카메라 Depth of Field(피사계 심도) 추가</strong>: Camera Properties → Depth of Field → Focus Object를 리간드로 설정 → F-Stop 0.5~2.0.
+      배경이 흐려지면서 활성 부위에 시선이 집중됩니다.
+    </div>
+  </div>
+
+  <!-- Example B-4 -->
+  <div class="practice">
+    <h3>예제 B-4: 스파이크 단백질 — 도메인 분리 (Exploded View)</h3>
+    <p style="color:var(--dim); margin-bottom:1rem">SARS-CoV-2 스파이크의 3량체(trimer) 구조를 도메인별로 분리하는 교육용 애니메이션.</p>
+    <ol>
+      <li><strong>임포트</strong>: PDB ID <code>6VYB</code> → Fetch from PDB (약 30~60초 소요, 큰 구조)</li>
+      <li><strong>3개 체인 색상 구분</strong>:
+        <ul>
+          <li>Chain A: 초록색, Chain B: 주황색, Chain C: 보라색</li>
+          <li>각 체인을 Outliner에서 선택 → 색상 적용</li>
+        </ul>
+      </li>
+      <li><strong>Puppet 생성</strong>: 각 체인(모노머)을 개별 Puppet으로 생성</li>
+      <li><strong>Pose 2개 저장</strong>:
+        <ul>
+          <li><code>Trimer_Intact</code>: 원래 위치 그대로</li>
+          <li>각 Puppet을 중심에서 바깥으로 <kbd>G</kbd> → 방사형으로 이동</li>
+          <li><code>Trimer_Separated</code>: 분리된 위치 저장</li>
+        </ul>
+      </li>
+      <li><strong>타임라인 구성</strong>:
+        <table style="margin:0.5rem 0">
+          <tr><th>프레임</th><th>상태</th><th>설명</th></tr>
+          <tr><td>1~30</td><td>Trimer_Intact</td><td>전체 구조를 보여줌</td></tr>
+          <tr><td>30~90</td><td>전환</td><td>3개 모노머가 서서히 분리됨</td></tr>
+          <tr><td>90~150</td><td>Trimer_Separated</td><td>분리 상태에서 회전하며 각 모노머 확인</td></tr>
+          <tr><td>150~210</td><td>전환</td><td>다시 합쳐짐</td></tr>
+          <tr><td>210~240</td><td>Trimer_Intact</td><td>마무리</td></tr>
+        </table>
+      </li>
+      <li>각 전환 구간의 시작/끝에 키프레임 삽입</li>
+    </ol>
+    <div class="warn" style="margin-top:1rem">
+      스파이크 단백질은 약 3,000+ 잔기로 무겁습니다.
+      EEVEE 엔진으로 프리뷰하고, 뷰포트 셰이딩을 <strong>Solid</strong>로 유지하면 작업이 훨씬 빠릅니다.
+      최종 렌더링만 Cycles + Material Preview로 전환하세요.
+    </div>
+  </div>
+
+  <!-- Example B-5 -->
+  <div class="practice">
+    <h3>예제 B-5: OpenFold3 예측 구조 — pLDDT 신뢰도 시각화</h3>
+    <p style="color:var(--dim); margin-bottom:1rem">OpenFold3-MLX로 예측한 구조를 임포트하여 신뢰도에 따른 색상을 부여하고 논문 이미지를 생성합니다.</p>
+    <ol>
+      <li><strong>구조 예측</strong>: OpenFold3-MLX GUI 또는 CLI로 시퀀스 예측 실행
+        <ul>
+          <li>결과 파일: <code>output/prediction.pdb</code> (B-factor 컬럼에 pLDDT 점수 저장됨)</li>
+        </ul>
+      </li>
+      <li><strong>임포트</strong>: Importer → 폴더 아이콘 → <code>prediction.pdb</code> 선택</li>
+      <li><strong>pLDDT 색상 스킴 적용</strong>: 도메인/영역별로 수동 색상 지정
+        <table style="margin:0.5rem 0">
+          <tr><th>pLDDT 범위</th><th>의미</th><th>색상</th><th>Hex</th></tr>
+          <tr><td>&gt; 90</td><td>매우 높은 신뢰도</td><td>진한 파란색</td><td><code>#0053D6</code></td></tr>
+          <tr><td>70 ~ 90</td><td>높은 신뢰도</td><td>하늘색</td><td><code>#65CBF3</code></td></tr>
+          <tr><td>50 ~ 70</td><td>낮은 신뢰도</td><td>노란색</td><td><code>#FFDB13</code></td></tr>
+          <tr><td>&lt; 50</td><td>매우 낮은 신뢰도</td><td>주황색</td><td><code>#FF7D45</code></td></tr>
+        </table>
+        (이 색상은 AlphaFold DB 공식 컬러 스킴과 동일)
+      </li>
+      <li><strong>비교 이미지 제작</strong>:
+        <ul>
+          <li>같은 구조를 두 번 임포트 → 하나는 Cartoon, 하나는 Surface</li>
+          <li>나란히 배치하여 2D 구조 vs 3D 표면을 동시에 보여줌</li>
+        </ul>
+      </li>
+      <li><strong>논문용 정적 이미지 렌더링</strong>:
+        <ul>
+          <li>카메라 앵글 잡기 → <kbd>Numpad 0</kbd>으로 확인</li>
+          <li>Render → Render Image (<kbd>F12</kbd>) → Image → Save As로 PNG 저장</li>
+          <li>해상도: 최소 300 DPI (3000x2000 px 이상 권장)</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- Scene Setup Guide -->
+<section id="scene">
+  <h2>씬 세팅 가이드</h2>
+  <p>같은 단백질이라도 조명, 배경, 카메라 설정에 따라 결과물 품질이 크게 달라집니다.</p>
+
+  <!-- Lighting -->
+  <div class="card">
+    <h3>조명 설정</h3>
+    <table>
+      <tr><th>용도</th><th>조명 구성</th><th>설정 방법</th></tr>
+      <tr>
+        <td><strong>논문 Figure</strong></td>
+        <td>균일한 조명 (그림자 최소)</td>
+        <td>World Properties → Surface → Color: 흰색, Strength: 1.0~1.5<br>
+        별도 조명 없이 환경광만 사용 → 그림자 없는 깔끔한 이미지</td>
+      </tr>
+      <tr>
+        <td><strong>발표 슬라이드</strong></td>
+        <td>3점 조명 (Key + Fill + Rim)</td>
+        <td><kbd>Shift</kbd>+<kbd>A</kbd> → Light → Area Light 3개 추가<br>
+        Key Light: 앞쪽 45도, 밝게 / Fill: 반대편, 약하게 / Rim: 뒤쪽, 윤곽 강조</td>
+      </tr>
+      <tr>
+        <td><strong>드라마틱 영상</strong></td>
+        <td>단일 스팟 + 어두운 배경</td>
+        <td>Spot Light 1개 → 좁은 각도 → 단백질 일부만 비춤<br>
+        World Color: 검정 → 영화 같은 분위기</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Background -->
+  <div class="card">
+    <h3>배경 설정</h3>
+    <table>
+      <tr><th>스타일</th><th>설정</th></tr>
+      <tr>
+        <td><strong>흰 배경</strong> (논문용)</td>
+        <td>World Properties → Color: <code>#FFFFFF</code>, Render → Film → Transparent 체크 해제</td>
+      </tr>
+      <tr>
+        <td><strong>투명 배경</strong> (합성용)</td>
+        <td>Render → Film → <strong>Transparent</strong> 체크 → PNG 저장 시 알파 채널 포함</td>
+      </tr>
+      <tr>
+        <td><strong>그라데이션</strong> (발표용)</td>
+        <td>World → Use Nodes → Color를 Gradient Texture로 교체<br>
+        또는 배경 평면 추가 후 머티리얼로 그라데이션 적용</td>
+      </tr>
+      <tr>
+        <td><strong>어두운 배경</strong> (영상용)</td>
+        <td>World Color: <code>#0A0A0A</code> ~ <code>#1A1A2E</code> (완전 검정보다 약간 밝게)</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Camera -->
+  <div class="card">
+    <h3>카메라 팁</h3>
+    <ul>
+      <li><strong>구도 잡기</strong>: <kbd>Numpad 0</kbd>으로 카메라 뷰 → <kbd>G</kbd> → 가운데 마우스 버튼으로 카메라 이동 (Lock Camera to View 필요)
+        <ul><li>사이드바 → View 탭 → <strong>Camera to View</strong> 체크 → 뷰포트 조작이 곧 카메라 이동</li></ul>
+      </li>
+      <li><strong>초점 거리(Focal Length)</strong>:
+        <table style="margin:0.5rem 0">
+          <tr><th>값</th><th>효과</th><th>추천 용도</th></tr>
+          <tr><td>35mm</td><td>넓은 화각, 원근감 강조</td><td>큰 복합체 전체샷</td></tr>
+          <tr><td>50mm</td><td>자연스러운 비율 (기본값)</td><td>범용</td></tr>
+          <tr><td>85~100mm</td><td>망원, 압축 효과</td><td>활성 부위 클로즈업</td></tr>
+          <tr><td>200mm+</td><td>거의 직교 투영</td><td>구조 비교 (왜곡 최소)</td></tr>
+        </table>
+      </li>
+      <li><strong>Orthographic (직교 투영)</strong>: Camera Properties → Type → Orthographic. 원근 왜곡이 전혀 없어서 구조 비교 논문에 적합</li>
+    </ul>
+  </div>
+
+  <!-- Render Settings -->
+  <div class="card">
+    <h3>렌더링 엔진 비교</h3>
+    <table>
+      <tr><th>엔진</th><th>장점</th><th>단점</th><th>추천</th></tr>
+      <tr>
+        <td><strong>EEVEE</strong></td>
+        <td>실시간 속도, 빠른 프리뷰</td>
+        <td>반사/굴절 제한적</td>
+        <td>작업 중 프리뷰, 간단한 영상</td>
+      </tr>
+      <tr>
+        <td><strong>Cycles</strong></td>
+        <td>물리 기반, 고품질 조명/반사</td>
+        <td>렌더링 시간 긺</td>
+        <td>논문 Figure, 최종 영상</td>
+      </tr>
+    </table>
+    <div class="tip" style="margin-top:0.8rem">
+      <strong>Mac 사용자</strong>: Cycles → Render Properties → Device → <strong>GPU Compute (Metal)</strong> 선택.
+      M4 Pro에서 Metal GPU 가속 시 CPU 대비 3~5배 빠릅니다.
+      Samples: 프리뷰 32, 최종 128~256이면 충분합니다.
+    </div>
+  </div>
+
+  <!-- Color schemes -->
+  <div class="card">
+    <h3>추천 색상 팔레트</h3>
+    <table>
+      <tr><th>용도</th><th>색상 구성</th><th>Hex 코드</th></tr>
+      <tr>
+        <td><strong>체인 구분 (4색)</strong></td>
+        <td>파랑 / 빨강 / 초록 / 주황</td>
+        <td><code>#4A90D9</code> <code>#D94A4A</code> <code>#50C878</code> <code>#E8963E</code></td>
+      </tr>
+      <tr>
+        <td><strong>알파/베타 구분</strong></td>
+        <td>알파 헬릭스: 빨강 / 베타 시트: 노랑 / 루프: 회색</td>
+        <td><code>#E74C3C</code> <code>#F1C40F</code> <code>#95A5A6</code></td>
+      </tr>
+      <tr>
+        <td><strong>단백질 vs 리간드</strong></td>
+        <td>단백질: 연회색 / 리간드: 선명한 노랑</td>
+        <td><code>#B0B0B0</code> <code>#FFD700</code></td>
+      </tr>
+      <tr>
+        <td><strong>pLDDT 스킴</strong></td>
+        <td>매우높음/높음/낮음/매우낮음</td>
+        <td><code>#0053D6</code> <code>#65CBF3</code> <code>#FFDB13</code> <code>#FF7D45</code></td>
+      </tr>
+      <tr>
+        <td><strong>다크 배경용</strong></td>
+        <td>시안 / 마젠타 / 라임</td>
+        <td><code>#00D4FF</code> <code>#FF6EC7</code> <code>#B4FF00</code></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- Workflow: OpenFold3 → ProteinBlender pipeline -->
+<section id="pipeline">
+  <h2>OpenFold3-MLX → ProteinBlender 파이프라인</h2>
+  <p>시퀀스 예측부터 최종 영상까지의 전체 워크플로입니다.</p>
+
+  <div class="workflow" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
+    <div class="wf-step">
+      <div class="wf-icon">🧬</div>
+      <div class="wf-label">서열 입력</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-icon">🔮</div>
+      <div class="wf-label">OpenFold3 예측</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-icon">📄</div>
+      <div class="wf-label">.pdb 출력</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-icon">📥</div>
+      <div class="wf-label">Blender 임포트</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-icon">🎨</div>
+      <div class="wf-label">시각화/색상</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-icon">🎬</div>
+      <div class="wf-label">렌더링</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>단계별 상세</h3>
+    <ol>
+      <li><strong>서열 준비</strong>: FASTA 형식 또는 단순 아미노산 서열 문자열
+        <ul><li>OpenFold3 GUI: Streamlit 인터페이스에서 직접 입력</li>
+        <li>CLI: <code>./predict.sh 'MSKGEELFT...'</code></li></ul>
+      </li>
+      <li><strong>예측 실행</strong>: MSA 생성 (MMseqs2) → 모델 추론 → 구조 출력
+        <ul><li>소요 시간: 서열 길이에 따라 수 분 ~ 수십 분</li>
+        <li>메모리: 300 잔기 이하는 16GB로 충분, 그 이상은 48GB 권장</li></ul>
+      </li>
+      <li><strong>결과 확인</strong>:
+        <ul>
+          <li>출력 디렉토리에서 <code>.pdb</code> 파일 확인</li>
+          <li>B-factor 컬럼 = pLDDT 점수 (0~100)</li>
+          <li>pLDDT &gt; 70이면 신뢰할 수 있는 구조</li>
+        </ul>
+      </li>
+      <li><strong>Blender 작업</strong>: 위 예제 B-5 참고</li>
+    </ol>
+  </div>
+</section>
+
+<!-- Resources -->
+<section id="resources">
+  <h2>참고 자료</h2>
+  <div class="card">
+    <h3>공식 리소스</h3>
+    <ul>
+      <li><a href="https://animation-lab.github.io/ProteinBlender/" style="color:var(--accent)">ProteinBlender 공식 문서</a></li>
+      <li><a href="https://www.youtube.com/playlist?list=PLkW6xkyq5Q83ix0tGKf4Kdi2sBqND5bA3" style="color:var(--accent)">YouTube 튜토리얼 재생목록</a></li>
+      <li><a href="https://www.youtube.com/watch?v=FpLOwE0MfCk" style="color:var(--accent)">설치 방법 영상</a></li>
+      <li><a href="https://www.youtube.com/watch?v=XLPvo1Ax3G4" style="color:var(--accent)">애니메이션 튜토리얼 영상</a></li>
+      <li><a href="https://github.com/Animation-Lab/ProteinBlender" style="color:var(--accent)">GitHub 저장소</a> (이슈/토론)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>연습용 PDB ID 모음</h3>
+    <table>
+      <tr><th>PDB ID</th><th>단백질</th><th>크기</th><th>특징</th></tr>
+      <tr><td><code>1CRN</code></td><td>크램빈</td><td>46 잔기</td><td>최소 크기, 빠른 테스트용</td></tr>
+      <tr><td><code>1UBQ</code></td><td>유비퀴틴</td><td>76 잔기</td><td>단일 도메인, 알파+베타 구조</td></tr>
+      <tr><td><code>1MBO</code></td><td>미오글로빈</td><td>153 잔기</td><td>헴 리간드 포함</td></tr>
+      <tr><td><code>2HHB</code></td><td>헤모글로빈</td><td>574 잔기 (4체인)</td><td>멀티 체인 복합체</td></tr>
+      <tr><td><code>1HHO</code></td><td>디옥시 헤모글로빈</td><td>574 잔기 (4체인)</td><td>2HHB와 비교 → Oxy/Deoxy 전환</td></tr>
+      <tr><td><code>6LU7</code></td><td>SARS-CoV-2 Mpro</td><td>306 잔기</td><td>리간드 복합체, 약물 설계 교육</td></tr>
+      <tr><td><code>6VYB</code></td><td>SARS-CoV-2 스파이크</td><td>~3,300 잔기</td><td>대형 3량체, 도메인 분리 예제</td></tr>
+      <tr><td><code>3J3Q</code></td><td>리보솜 (80S)</td><td>~15,000+ 잔기</td><td>초대형, 성능 테스트용</td></tr>
+      <tr><td><code>7BBV</code></td><td>GFP (녹색형광단백질)</td><td>238 잔기</td><td>베타 배럴 구조, 형광 교육</td></tr>
+      <tr><td><code>1BNA</code></td><td>B-DNA 이중나선</td><td>핵산</td><td>DNA 구조 시각화</td></tr>
+    </table>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  ProteinBlender Tutorial &mdash; Created for OpenFold3-MLX workflow<br>
+  Built on <a href="https://animation-lab.github.io/ProteinBlender/">ProteinBlender</a> by Animation Lab
+</footer>
+
+</body>
+</html>
