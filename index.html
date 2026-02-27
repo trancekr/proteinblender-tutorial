@@ -752,18 +752,58 @@
 
   <div class="card">
     <h3>렌더링 설정</h3>
-    <ol>
-      <li><strong>Output Properties</strong> 탭 (프린터 아이콘)에서 해상도 설정
-        <ul>
-          <li>발표용: 1920 x 1080 (Full HD)</li>
-          <li>SNS/웹: 1280 x 720</li>
-        </ul>
-      </li>
-      <li><strong>Frame Range</strong>: Start = 1, End = 마지막 키프레임</li>
-      <li><strong>Output Format</strong>: FFmpeg Video → Container: MPEG-4</li>
-      <li>출력 경로 지정</li>
-      <li>메뉴 <strong>Render → Render Animation</strong> (<kbd>Ctrl</kbd>+<kbd>F12</kbd>)</li>
+    <p style="color:var(--dim); margin-bottom:0.8rem">Properties Editor → <strong>Output Properties</strong> 탭 (프린터 🖨️ 아이콘)에서 아래 항목을 설정합니다.</p>
+    <table>
+      <tr><th>섹션</th><th>항목</th><th>설정값</th></tr>
+      <tr>
+        <td rowspan="2"><strong>Format</strong></td>
+        <td>Resolution X / Y</td>
+        <td>발표용: <code>1920 × 1080</code>, SNS/웹: <code>1280 × 720</code></td>
+      </tr>
+      <tr>
+        <td>Frame Rate</td>
+        <td><code>24 fps</code> (기본값, 영화 느낌) 또는 <code>30 fps</code></td>
+      </tr>
+      <tr>
+        <td><strong>Frame Range</strong></td>
+        <td>Frame Start / End</td>
+        <td>Start: <code>1</code>, End: 마지막 키프레임 (예: <code>120</code>)</td>
+      </tr>
+      <tr>
+        <td><strong>Output</strong></td>
+        <td>출력 경로</td>
+        <td>저장할 폴더 경로 지정 (폴더 아이콘 클릭)</td>
+      </tr>
+      <tr>
+        <td rowspan="2"><strong>Output<br>(File Format)</strong></td>
+        <td>File Format</td>
+        <td><strong>FFmpeg Video</strong> 선택</td>
+      </tr>
+      <tr>
+        <td>Color</td>
+        <td><strong>RGB</strong> (일반) 또는 RGBA (투명 배경 필요 시)</td>
+      </tr>
+      <tr>
+        <td rowspan="3"><strong>Encoding</strong></td>
+        <td>Container</td>
+        <td><strong>MPEG-4</strong> (범용 호환) 또는 Matroska (기본값)</td>
+      </tr>
+      <tr>
+        <td>Video Codec</td>
+        <td><strong>H.264</strong> (기본값, 가장 호환성 좋음)</td>
+      </tr>
+      <tr>
+        <td>Output Quality</td>
+        <td><strong>Medium Quality</strong> (기본값) 또는 High Quality (논문용)</td>
+      </tr>
+    </table>
+    <ol style="margin-top:1rem">
+      <li>위 설정 완료 후 → 메뉴 <strong>Render → Render Animation</strong> (<kbd>Ctrl</kbd>+<kbd>F12</kbd>)</li>
     </ol>
+    <div class="tip" style="margin-top:0.8rem">
+      <strong>PowerPoint/Keynote에 삽입하려면</strong> Container를 <strong>MPEG-4</strong>로 바꾸세요.
+      기본값 Matroska(.mkv)는 일부 프로그램에서 재생이 안 될 수 있습니다.
+    </div>
   </div>
 
   <div class="tip">
