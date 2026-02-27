@@ -341,6 +341,7 @@
   <a href="#practice">실습</a>
   <a href="#examples">예제 모음</a>
   <a href="#scene">씬 세팅</a>
+  <a href="#panel-location">패널 위치</a>
 </nav>
 
 <!-- Hero -->
@@ -459,158 +460,9 @@
     이 워크스페이스는 왼쪽 70%에 3D Viewport, 오른쪽 30%에 <strong>Properties Editor</strong>가 배치되어 있습니다.
   </div>
 
-  <div class="warn">
-    <strong>ProteinBlender 패널은 <kbd>N</kbd> 키 사이드바가 아닙니다!</strong><br>
-    ProteinBlender의 모든 패널(Importer, Visual Setup, Puppet Maker 등)은 <strong>Properties Editor의 Scene 탭 (원뿔 🔻 아이콘)</strong>에 세로로 나열됩니다.
-    <kbd>N</kbd> 키를 눌러도 나오지 않으니, 오른쪽 Properties 패널에서 원뿔 아이콘을 클릭하고 <strong>아래로 스크롤</strong>하세요.
-  </div>
-
-  <div class="card">
-    <h3>ProteinBlender 패널 위치 (중요!)</h3>
-    <p style="color:var(--dim); margin-bottom:1rem">ProteinBlender의 패널은 3D Viewport의 <kbd>N</kbd> 키 사이드바가 <strong>아니라</strong>, Properties Editor(화면 오른쪽)의 <strong>Scene 탭</strong>에 있습니다.</p>
-
-    <!-- Blender workspace layout diagram -->
-    <h4 style="color:var(--accent); margin-bottom:0.8rem">워크스페이스 전체 구조</h4>
-    <div style="display:flex; gap:4px; height:220px; background:#1a1a24; border-radius:8px; padding:6px; border:1px solid var(--border); margin-bottom:1.5rem; font-size:0.78rem; overflow:hidden;">
-      <!-- 3D Viewport -->
-      <div style="flex:7; display:flex; flex-direction:column; gap:4px;">
-        <div style="flex:7; background:#2a2a36; border-radius:4px; display:flex; align-items:center; justify-content:center; color:var(--dim); border:1px solid #444; position:relative;">
-          <div style="font-size:1.5rem; opacity:0.3">🧬</div>
-          <div style="position:absolute; top:6px; left:8px; font-size:0.7rem; color:var(--dim)">3D Viewport</div>
-          <div style="position:absolute; top:6px; right:8px; display:flex; gap:3px;">
-            <span style="width:14px; height:14px; border-radius:50%; background:#555; display:inline-flex; align-items:center; justify-content:center; font-size:0.55rem">⚪</span>
-            <span style="width:14px; height:14px; border-radius:50%; background:#555; display:inline-flex; align-items:center; justify-content:center; font-size:0.55rem">🔵</span>
-            <span style="width:14px; height:14px; border-radius:50%; background:#555; display:inline-flex; align-items:center; justify-content:center; font-size:0.55rem">🟣</span>
-          </div>
-        </div>
-        <!-- Timeline -->
-        <div style="flex:2; background:#2a2a36; border-radius:4px; display:flex; align-items:center; padding:0 8px; color:var(--dim); border:1px solid #444; font-size:0.7rem;">
-          <span>Dope Sheet / Timeline</span>
-          <span style="margin-left:auto; font-size:0.65rem; color:#666">▶ ◀◀ ▶▶</span>
-        </div>
-      </div>
-      <!-- Properties Editor -->
-      <div style="flex:3; background:#2a2a36; border-radius:4px; display:flex; border:2px solid var(--accent); position:relative;">
-        <!-- Tab strip -->
-        <div style="width:28px; background:#222; border-radius:3px 0 0 3px; display:flex; flex-direction:column; align-items:center; padding-top:6px; gap:2px; flex-shrink:0;">
-          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; background:#333;" title="Active Tool">🔧</div>
-          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; background:#333;" title="Render">📷</div>
-          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; background:#555; border:1px solid var(--orange);" title="Output Properties">🖨️</div>
-          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; background:#333;" title="View Layer">🎬</div>
-          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; background:var(--accent); color:#000; border:2px solid #fff; box-shadow:0 0 8px var(--accent);" title="Scene Properties">🔻</div>
-          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; background:#333;" title="World">🌍</div>
-          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.5rem; background:#333;" title="Object">🟧</div>
-          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; background:#333;" title="Modifiers">🔩</div>
-          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.5rem; background:#333;" title="Particles">✨</div>
-        </div>
-        <!-- Panel content -->
-        <div style="flex:1; padding:6px 8px; overflow:hidden; display:flex; flex-direction:column; gap:3px; font-size:0.68rem;">
-          <div style="color:var(--accent); font-weight:700; font-size:0.72rem; margin-bottom:2px;">Scene Properties</div>
-          <div style="background:#333; border-radius:3px; padding:3px 6px; color:var(--dim);">▶ Scene</div>
-          <div style="background:#333; border-radius:3px; padding:3px 6px; color:var(--dim);">▶ Units</div>
-          <div style="background:rgba(88,166,255,0.15); border-radius:3px; padding:3px 6px; color:var(--accent); border-left:2px solid var(--accent);">▼ <strong>Protein Import</strong></div>
-          <div style="background:rgba(88,166,255,0.15); border-radius:3px; padding:3px 6px; color:var(--accent); border-left:2px solid var(--accent);">▼ <strong>Protein Outliner</strong></div>
-          <div style="background:rgba(88,166,255,0.15); border-radius:3px; padding:3px 6px; color:var(--accent); border-left:2px solid var(--accent);">▼ <strong>Visual Set-up</strong></div>
-          <div style="background:rgba(88,166,255,0.12); border-radius:3px; padding:3px 6px; color:var(--accent); border-left:2px solid var(--accent); opacity:0.7">▶ Puppet Maker ...</div>
-          <div style="color:#555; font-size:0.6rem; text-align:center; margin-top:1px">↓ 스크롤 ↓</div>
-        </div>
-        <!-- Label -->
-        <div style="position:absolute; top:-14px; right:8px; background:var(--accent); color:#000; font-size:0.65rem; font-weight:700; padding:1px 8px; border-radius:3px 3px 0 0;">Properties Editor</div>
-      </div>
-    </div>
-
-    <!-- Tab icon detail diagram -->
-    <h4 style="color:var(--accent); margin-bottom:0.8rem">Properties Editor 탭 아이콘 상세</h4>
-    <p style="color:var(--dim); font-size:0.9rem; margin-bottom:0.8rem">Properties Editor <strong>왼쪽 가장자리</strong>에 세로로 나열된 아이콘 중 <strong>원뿔(🔻)</strong>을 찾으세요:</p>
-
-    <div style="display:inline-flex; flex-direction:column; gap:0; background:#222; border-radius:8px; padding:8px 0; border:1px solid var(--border); margin-bottom:1rem;">
-      <!-- Each tab row -->
-      <div style="display:flex; align-items:center; gap:10px; padding:5px 14px 5px 10px;">
-        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; background:#333;">🔧</div>
-        <span style="color:#666; font-size:0.82rem;">Active Tool</span>
-      </div>
-      <div style="display:flex; align-items:center; gap:10px; padding:5px 14px 5px 10px;">
-        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; background:#333;">📷</div>
-        <span style="color:#666; font-size:0.82rem;">Render Properties</span>
-      </div>
-      <div style="display:flex; align-items:center; gap:10px; padding:5px 14px 5px 10px; background:rgba(210,153,34,0.1); border-left:3px solid var(--orange); margin-left:-1px;">
-        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; background:#555; border:1px solid var(--orange);">🖨️</div>
-        <span style="color:var(--orange); font-size:0.82rem; font-weight:600;">Output Properties — <span style="font-weight:400">여기가 아닙니다!</span></span>
-      </div>
-      <div style="display:flex; align-items:center; gap:10px; padding:5px 14px 5px 10px;">
-        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; background:#333;">🎬</div>
-        <span style="color:#666; font-size:0.82rem;">View Layer Properties</span>
-      </div>
-      <div style="display:flex; align-items:center; gap:10px; padding:7px 14px 7px 10px; background:rgba(88,166,255,0.15); border:2px solid var(--accent); border-radius:6px; margin:2px 4px; position:relative;">
-        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; background:var(--accent); color:#000; font-weight:700;">🔻</div>
-        <span style="color:var(--accent); font-size:0.88rem; font-weight:700;">Scene Properties — 여기를 클릭!</span>
-        <span style="position:absolute; right:-50px; font-size:1.2rem; animation:none;">👈</span>
-      </div>
-      <div style="display:flex; align-items:center; gap:10px; padding:5px 14px 5px 10px;">
-        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; background:#333;">🌍</div>
-        <span style="color:#666; font-size:0.82rem;">World Properties</span>
-      </div>
-      <div style="display:flex; align-items:center; gap:10px; padding:5px 14px 5px 10px;">
-        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.7rem; background:#333;">🟧</div>
-        <span style="color:#666; font-size:0.82rem;">Object Properties</span>
-      </div>
-      <div style="display:flex; align-items:center; gap:10px; padding:5px 14px 5px 10px;">
-        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; background:#333;">🔩</div>
-        <span style="color:#666; font-size:0.82rem;">Modifier Properties ...</span>
-      </div>
-    </div>
-
-    <!-- Before/After comparison -->
-    <h4 style="color:var(--accent); margin:1.2rem 0 0.8rem">❌ Output 탭 vs ✅ Scene 탭 — 비교</h4>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:1.2rem;">
-      <!-- Wrong: Output tab -->
-      <div style="background:#1a1a24; border-radius:8px; padding:12px; border:2px solid var(--red);">
-        <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;">
-          <span style="color:var(--red); font-weight:700; font-size:0.9rem;">❌ Output 탭 (프린터)</span>
-        </div>
-        <div style="display:flex; flex-direction:column; gap:3px; font-size:0.78rem;">
-          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Format</div>
-          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Frame Range</div>
-          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Stereoscopy</div>
-          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Output</div>
-          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Metadata</div>
-          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Post Processing</div>
-        </div>
-        <div style="color:var(--red); font-size:0.75rem; margin-top:6px; text-align:center;">이 내용이 보이면 탭이 잘못된 것!</div>
-      </div>
-      <!-- Correct: Scene tab -->
-      <div style="background:#1a1a24; border-radius:8px; padding:12px; border:2px solid var(--green);">
-        <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;">
-          <span style="color:var(--green); font-weight:700; font-size:0.9rem;">✅ Scene 탭 (원뿔)</span>
-        </div>
-        <div style="display:flex; flex-direction:column; gap:3px; font-size:0.78rem;">
-          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Scene</div>
-          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Units</div>
-          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Gravity</div>
-          <div style="background:rgba(88,166,255,0.15); border-radius:3px; padding:4px 8px; color:var(--accent); border-left:2px solid var(--accent); font-weight:600;">▼ Protein Import</div>
-          <div style="background:rgba(88,166,255,0.15); border-radius:3px; padding:4px 8px; color:var(--accent); border-left:2px solid var(--accent); font-weight:600;">▼ Protein Outliner</div>
-          <div style="background:rgba(88,166,255,0.15); border-radius:3px; padding:4px 8px; color:var(--accent); border-left:2px solid var(--accent); font-weight:600;">▼ Visual Set-up</div>
-        </div>
-        <div style="color:var(--green); font-size:0.75rem; margin-top:6px; text-align:center;">이 내용이 보이면 정답!</div>
-      </div>
-    </div>
-
-    <h4 style="color:var(--accent); margin:1rem 0 0.5rem">ProteinBlender 패널 목록 (Scene 탭 안에 있음)</h4>
-    <table style="margin-top:0.5rem">
-      <tr><th>순서</th><th>패널 이름</th><th>기능</th></tr>
-      <tr><td>1</td><td><strong>Protein Import</strong></td><td>PDB/AlphaFold에서 구조 임포트</td></tr>
-      <tr><td>2</td><td><strong>Protein Outliner</strong></td><td>체인/도메인 목록 및 선택</td></tr>
-      <tr><td>3</td><td><strong>Visual Set-up</strong></td><td>색상, 표현 스타일(Cartoon/Surface 등) 변경</td></tr>
-      <tr><td>4</td><td><strong>Domain Maker</strong></td><td>도메인 분할/생성</td></tr>
-      <tr><td>5</td><td><strong>Protein Puppet Maker</strong></td><td>체인을 Puppet으로 그룹핑</td></tr>
-      <tr><td>6</td><td><strong>Protein Pose Library</strong></td><td>포즈 저장/적용</td></tr>
-      <tr><td>7</td><td><strong>Animate Scene</strong></td><td>키프레임 생성, 프레임 범위, Cyclic 설정</td></tr>
-    </table>
-
-    <div class="tip" style="margin-top:0.8rem">
-      패널이 접혀 있을 수 있습니다. 각 패널의 <strong>▶ 화살표</strong>를 클릭하면 내용이 펼쳐집니다.
-      Scene 탭에는 Blender 기본 패널(Scene, Units, Gravity 등)도 함께 있으므로, ProteinBlender 패널을 찾으려면 <strong>아래로 스크롤</strong>이 필요합니다.
-    </div>
+  <div class="tip">
+    ProteinBlender의 모든 패널은 Properties Editor의 <strong>Scene 탭(원뿔 🔻 아이콘)</strong>에 있습니다.
+    패널을 못 찾겠으면 페이지 하단의 <a href="#panel-location" style="color:var(--accent)">패널 위치 가이드</a>를 참고하세요.
   </div>
 </section>
 
@@ -1418,6 +1270,139 @@
       <tr><td><code>7BBV</code></td><td>GFP (녹색형광단백질)</td><td>238 잔기</td><td>베타 배럴 구조, 형광 교육</td></tr>
       <tr><td><code>1BNA</code></td><td>B-DNA 이중나선</td><td>핵산</td><td>DNA 구조 시각화</td></tr>
     </table>
+  </div>
+</section>
+
+<!-- Panel Location Guide -->
+<section id="panel-location">
+  <h2>부록: ProteinBlender 패널 위치 가이드</h2>
+  <p>ProteinBlender의 패널이 어디에 있는지 모르겠을 때 참고하세요. 패널은 <kbd>N</kbd> 키 사이드바가 <strong>아니라</strong> Properties Editor의 <strong>Scene 탭</strong>에 있습니다.</p>
+
+  <div class="card">
+    <h3>워크스페이스 전체 구조</h3>
+    <div style="display:flex; gap:4px; height:220px; background:#1a1a24; border-radius:8px; padding:6px; border:1px solid var(--border); margin-bottom:0.5rem; font-size:0.78rem; overflow:hidden;">
+      <div style="flex:7; display:flex; flex-direction:column; gap:4px;">
+        <div style="flex:7; background:#2a2a36; border-radius:4px; display:flex; align-items:center; justify-content:center; color:var(--dim); border:1px solid #444; position:relative;">
+          <div style="font-size:1.5rem; opacity:0.3">🧬</div>
+          <div style="position:absolute; top:6px; left:8px; font-size:0.7rem; color:var(--dim)">3D Viewport</div>
+        </div>
+        <div style="flex:2; background:#2a2a36; border-radius:4px; display:flex; align-items:center; padding:0 8px; color:var(--dim); border:1px solid #444; font-size:0.7rem;">
+          <span>Dope Sheet / Timeline</span>
+          <span style="margin-left:auto; font-size:0.65rem; color:#666">▶ ◀◀ ▶▶</span>
+        </div>
+      </div>
+      <div style="flex:3; background:#2a2a36; border-radius:4px; display:flex; border:2px solid var(--accent); position:relative;">
+        <div style="width:28px; background:#222; border-radius:3px 0 0 3px; display:flex; flex-direction:column; align-items:center; padding-top:6px; gap:2px; flex-shrink:0;">
+          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; background:#333;">🔧</div>
+          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; background:#333;">📷</div>
+          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; background:#555; border:1px solid var(--orange);">🖨️</div>
+          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; background:#333;">🎬</div>
+          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; background:var(--accent); color:#000; border:2px solid #fff; box-shadow:0 0 8px var(--accent);">🔻</div>
+          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; background:#333;">🌍</div>
+          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.5rem; background:#333;">🟧</div>
+          <div style="width:20px; height:18px; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; background:#333;">🔩</div>
+        </div>
+        <div style="flex:1; padding:6px 8px; overflow:hidden; display:flex; flex-direction:column; gap:3px; font-size:0.68rem;">
+          <div style="color:var(--accent); font-weight:700; font-size:0.72rem; margin-bottom:2px;">Scene Properties</div>
+          <div style="background:#333; border-radius:3px; padding:3px 6px; color:var(--dim);">▶ Scene</div>
+          <div style="background:#333; border-radius:3px; padding:3px 6px; color:var(--dim);">▶ Units</div>
+          <div style="background:rgba(88,166,255,0.15); border-radius:3px; padding:3px 6px; color:var(--accent); border-left:2px solid var(--accent);">▼ <strong>Protein Import</strong></div>
+          <div style="background:rgba(88,166,255,0.15); border-radius:3px; padding:3px 6px; color:var(--accent); border-left:2px solid var(--accent);">▼ <strong>Protein Outliner</strong></div>
+          <div style="background:rgba(88,166,255,0.15); border-radius:3px; padding:3px 6px; color:var(--accent); border-left:2px solid var(--accent);">▼ <strong>Visual Set-up</strong></div>
+          <div style="background:rgba(88,166,255,0.12); border-radius:3px; padding:3px 6px; color:var(--accent); border-left:2px solid var(--accent); opacity:0.7">▶ Puppet Maker ...</div>
+          <div style="color:#555; font-size:0.6rem; text-align:center; margin-top:1px">↓ 스크롤 ↓</div>
+        </div>
+        <div style="position:absolute; top:-14px; right:8px; background:var(--accent); color:#000; font-size:0.65rem; font-weight:700; padding:1px 8px; border-radius:3px 3px 0 0;">Properties Editor</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Properties Editor 탭 아이콘 상세</h3>
+    <p style="color:var(--dim); font-size:0.9rem; margin-bottom:0.8rem">Properties Editor <strong>왼쪽 가장자리</strong>에 세로로 나열된 아이콘 중 <strong>원뿔(🔻)</strong>을 찾으세요:</p>
+    <div style="display:inline-flex; flex-direction:column; gap:0; background:#222; border-radius:8px; padding:8px 0; border:1px solid var(--border); margin-bottom:1rem;">
+      <div style="display:flex; align-items:center; gap:10px; padding:5px 14px 5px 10px;">
+        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; background:#333;">🔧</div>
+        <span style="color:#666; font-size:0.82rem;">Active Tool</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:5px 14px 5px 10px;">
+        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; background:#333;">📷</div>
+        <span style="color:#666; font-size:0.82rem;">Render Properties</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:5px 14px 5px 10px; background:rgba(210,153,34,0.1); border-left:3px solid var(--orange); margin-left:-1px;">
+        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; background:#555; border:1px solid var(--orange);">🖨️</div>
+        <span style="color:var(--orange); font-size:0.82rem; font-weight:600;">Output Properties — <span style="font-weight:400">여기가 아닙니다!</span></span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:5px 14px 5px 10px;">
+        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; background:#333;">🎬</div>
+        <span style="color:#666; font-size:0.82rem;">View Layer Properties</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:7px 14px 7px 10px; background:rgba(88,166,255,0.15); border:2px solid var(--accent); border-radius:6px; margin:2px 4px; position:relative;">
+        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; background:var(--accent); color:#000; font-weight:700;">🔻</div>
+        <span style="color:var(--accent); font-size:0.88rem; font-weight:700;">Scene Properties — 여기를 클릭!</span>
+        <span style="position:absolute; right:-50px; font-size:1.2rem;">👈</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:5px 14px 5px 10px;">
+        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; background:#333;">🌍</div>
+        <span style="color:#666; font-size:0.82rem;">World Properties</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:5px 14px 5px 10px;">
+        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.7rem; background:#333;">🟧</div>
+        <span style="color:#666; font-size:0.82rem;">Object Properties</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:5px 14px 5px 10px;">
+        <div style="width:28px; height:24px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; background:#333;">🔩</div>
+        <span style="color:#666; font-size:0.82rem;">Modifier Properties ...</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>❌ Output 탭 vs ✅ Scene 탭 — 비교</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+      <div style="background:#1a1a24; border-radius:8px; padding:12px; border:2px solid var(--red);">
+        <div style="color:var(--red); font-weight:700; font-size:0.9rem; margin-bottom:8px;">❌ Output 탭 (프린터)</div>
+        <div style="display:flex; flex-direction:column; gap:3px; font-size:0.78rem;">
+          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Format</div>
+          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Frame Range</div>
+          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Stereoscopy</div>
+          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Output</div>
+          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Metadata</div>
+          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Post Processing</div>
+        </div>
+        <div style="color:var(--red); font-size:0.75rem; margin-top:6px; text-align:center;">이 내용이 보이면 탭이 잘못된 것!</div>
+      </div>
+      <div style="background:#1a1a24; border-radius:8px; padding:12px; border:2px solid var(--green);">
+        <div style="color:var(--green); font-weight:700; font-size:0.9rem; margin-bottom:8px;">✅ Scene 탭 (원뿔)</div>
+        <div style="display:flex; flex-direction:column; gap:3px; font-size:0.78rem;">
+          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Scene</div>
+          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Units</div>
+          <div style="background:#2a2a36; border-radius:3px; padding:4px 8px; color:var(--dim);">▶ Gravity</div>
+          <div style="background:rgba(88,166,255,0.15); border-radius:3px; padding:4px 8px; color:var(--accent); border-left:2px solid var(--accent); font-weight:600;">▼ Protein Import</div>
+          <div style="background:rgba(88,166,255,0.15); border-radius:3px; padding:4px 8px; color:var(--accent); border-left:2px solid var(--accent); font-weight:600;">▼ Protein Outliner</div>
+          <div style="background:rgba(88,166,255,0.15); border-radius:3px; padding:4px 8px; color:var(--accent); border-left:2px solid var(--accent); font-weight:600;">▼ Visual Set-up</div>
+        </div>
+        <div style="color:var(--green); font-size:0.75rem; margin-top:6px; text-align:center;">이 내용이 보이면 정답!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>ProteinBlender 패널 목록</h3>
+    <table>
+      <tr><th>순서</th><th>패널 이름</th><th>기능</th></tr>
+      <tr><td>1</td><td><strong>Protein Import</strong></td><td>PDB/AlphaFold에서 구조 임포트</td></tr>
+      <tr><td>2</td><td><strong>Protein Outliner</strong></td><td>체인/도메인 목록 및 선택</td></tr>
+      <tr><td>3</td><td><strong>Visual Set-up</strong></td><td>색상, 표현 스타일(Cartoon/Surface 등) 변경</td></tr>
+      <tr><td>4</td><td><strong>Domain Maker</strong></td><td>도메인 분할/생성</td></tr>
+      <tr><td>5</td><td><strong>Protein Puppet Maker</strong></td><td>체인을 Puppet으로 그룹핑</td></tr>
+      <tr><td>6</td><td><strong>Protein Pose Library</strong></td><td>포즈 저장/적용</td></tr>
+      <tr><td>7</td><td><strong>Animate Scene</strong></td><td>키프레임 생성, 프레임 범위, Cyclic 설정</td></tr>
+    </table>
+    <div class="tip" style="margin-top:0.8rem">
+      패널이 접혀 있을 수 있습니다. 각 패널의 <strong>▶ 화살표</strong>를 클릭하면 내용이 펼쳐집니다.
+      Scene 탭에는 Blender 기본 패널(Scene, Units, Gravity 등)도 함께 있으므로, ProteinBlender 패널을 찾으려면 <strong>아래로 스크롤</strong>이 필요합니다.
+    </div>
   </div>
 </section>
 
