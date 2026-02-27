@@ -781,7 +781,7 @@
       </tr>
       <tr>
         <td>Color</td>
-        <td><strong>RGB</strong> (일반) 또는 RGBA (투명 배경 필요 시)</td>
+        <td><strong>RGB</strong> (H.264는 알파 채널 미지원이므로 RGBA 선택 불필요)</td>
       </tr>
       <tr>
         <td rowspan="3"><strong>Encoding</strong></td>
@@ -1135,7 +1135,8 @@
       </tr>
       <tr>
         <td><strong>투명 배경</strong> (합성용)</td>
-        <td>Render → Film → <strong>Transparent</strong> 체크 → PNG 저장 시 알파 채널 포함</td>
+        <td>Render → Film → <strong>Transparent</strong> 체크 → <strong>PNG 이미지 시퀀스</strong>로 저장해야 알파 채널 포함됨<br>
+        <span style="color:var(--dim)">(H.264 동영상은 알파 미지원. 투명 배경 영상이 필요하면 PNG 시퀀스 → 외부 편집기에서 합성)</span></td>
       </tr>
       <tr>
         <td><strong>그라데이션</strong> (발표용)</td>
