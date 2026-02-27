@@ -613,6 +613,62 @@
     <tr><td>색상 변화</td><td>시간에 따른 색상 전환 효과</td></tr>
   </table>
 
+  <div class="card">
+    <h3>애니메이션 재생 방법</h3>
+    <table>
+      <tr><th>방법</th><th>설명</th></tr>
+      <tr>
+        <td><kbd>Space</kbd> 키</td>
+        <td>마우스 커서가 <strong>반드시 3D Viewport(단백질이 보이는 영역) 위에</strong> 있어야 합니다.<br>사이드바나 다른 패널 위에서는 작동하지 않습니다.</td>
+      </tr>
+      <tr>
+        <td>타임라인 <strong>▶</strong> 버튼</td>
+        <td>화면 하단 타임라인 바의 재생 버튼 클릭</td>
+      </tr>
+    </table>
+    <div class="warn" style="margin-top:0.8rem">
+      <strong>재생이 안 되는 경우 체크리스트:</strong><br>
+      ① <kbd>Shift</kbd>+<kbd>←</kbd>로 프레임 1로 돌아가세요 (마지막 프레임에서는 움직임이 보이지 않음)<br>
+      ② 마우스 커서를 3D Viewport 위로 옮긴 후 <kbd>Space</kbd><br>
+      ③ 다른 창(Preferences 등)이 열려 있으면 닫으세요<br>
+      ④ Preferences → Keymap → Spacebar Action이 <strong>"Play"</strong>로 설정되어 있는지 확인
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>반복(Cyclic) 애니메이션 설정</h3>
+    <p style="color:var(--dim); margin-bottom:1rem">애니메이션이 끝나면 자동으로 프레임 1로 돌아가서 반복 재생되게 하려면 <strong>두 곳</strong>을 모두 설정해야 합니다.</p>
+
+    <h4 style="color:var(--accent); margin-bottom:0.5rem">① Blender 프레임 범위 설정 (필수)</h4>
+    <p style="color:var(--dim)">Blender 자체의 타임라인 범위를 키프레임 범위와 일치시켜야 합니다.</p>
+    <ul style="color:var(--dim); padding-left:1.5rem; margin:0.5rem 0">
+      <li><strong>방법 A</strong>: 화면 하단 타임라인 헤더에서 <strong>Start: 1</strong>, <strong>End: 120</strong> 직접 입력</li>
+      <li><strong>방법 B</strong>: Properties 패널 → <strong>Output Properties</strong> (프린터 아이콘) → Frame Range → Start: 1, End: 120</li>
+    </ul>
+
+    <h4 style="color:var(--accent); margin:1rem 0 0.5rem">② 반복 재생 활성화 (선택)</h4>
+    <table>
+      <tr><th>방법</th><th>설명</th></tr>
+      <tr>
+        <td><strong>ProteinBlender</strong></td>
+        <td>Keyframe Tools → <strong>Manual Frame Range</strong> (Start/End를 1~120) 설정 + <strong>"Cycle Animation"</strong> 체크</td>
+      </tr>
+      <tr>
+        <td><strong>Graph Editor (확실한 방법)</strong></td>
+        <td><kbd>Shift</kbd>+<kbd>F6</kbd>으로 Graph Editor 열기 →<br>
+        <kbd>A</kbd>로 모든 커브 선택 → 메뉴 <strong>Channel → Extrapolation Mode → Make Cyclic (F-Modifier)</strong><br>
+        커브 양 끝에 점선이 표시되면 성공</td>
+      </tr>
+    </table>
+
+    <div class="warn" style="margin-top:0.8rem">
+      <strong>ProteinBlender의 "Manual Frame Range"와 Blender의 "Frame Range"는 별개입니다!</strong><br>
+      ProteinBlender의 설정만으로는 Blender의 타임라인 End가 바뀌지 않을 수 있습니다.
+      반드시 <strong>①번(Blender 프레임 범위)</strong>도 직접 설정하세요.<br>
+      타임라인 헤더의 End 값이 키프레임 마지막 프레임(예: 120)과 동일한지 확인하세요.
+    </div>
+  </div>
+
   <div class="info">
     <strong>Graph Editor</strong> (<kbd>Shift</kbd>+<kbd>F6</kbd>): 보간 곡선 정밀 제어<br>
     <strong>Dope Sheet</strong> (<kbd>Shift</kbd>+<kbd>F2</kbd>): 전체 키프레임 타임라인 관리
@@ -680,12 +736,18 @@
         <em style="color:var(--dim)">※ 뷰포트 셰이딩을 Material Preview (<kbd>Z</kbd>)로 전환해야 색상이 보입니다</em></li>
       <li><strong>Puppet 생성</strong>: Outliner에서 체인 선택 → Create New Puppet → 이름: <code>crambin</code></li>
       <li><strong>프레임 1</strong>: Puppet 선택 → Keyframe Tools → <strong>"Create Keyframe"</strong> (시작점 기록)</li>
-      <li><strong>프레임 120</strong>으로 이동 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>360</code> 입력 → <kbd>Enter</kbd></li>
-      <li>다시 <strong>"Create Keyframe"</strong> (끝점 기록)</li>
-      <li><kbd>Space</kbd>로 재생 → 360도 회전 확인!</li>
+      <li><strong>프레임 60</strong>으로 이동 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> 입력 → <kbd>Enter</kbd> → <strong>"Create Keyframe"</strong></li>
+      <li><strong>프레임 120</strong>으로 이동 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> 입력 → <kbd>Enter</kbd> → <strong>"Create Keyframe"</strong></li>
+      <li><kbd>Shift</kbd>+<kbd>←</kbd>로 프레임 1로 돌아간 후 → <kbd>Space</kbd>로 재생 → 360도 회전 확인!</li>
       <li><strong>매끄러운 회전</strong>: Graph Editor 열기 (<kbd>Shift</kbd>+<kbd>F6</kbd>) → 회전 커브 선택 → <kbd>T</kbd> → Linear로 변경</li>
     </ol>
-    <div class="tip" style="margin-top:1rem">
+    <div class="warn" style="margin-top:1rem">
+      <strong>왜 360도를 한 번에 입력하면 안 되나요?</strong><br>
+      Blender는 내부적으로 쿼터니언(Quaternion)을 사용하여 회전을 저장합니다.
+      360도 회전 = 0도 회전과 수학적으로 동일하므로, 프레임 1과 프레임 120의 회전값이 같아져서 <strong>아무 움직임도 발생하지 않습니다</strong>.
+      반드시 180도씩 2단계로 나누어 입력하세요.
+    </div>
+    <div class="tip" style="margin-top:0.5rem">
       처음에는 Ease-In/Out 보간이 기본이라 시작과 끝이 느려집니다.
       Linear로 바꾸면 일정한 속도로 회전합니다. 루프 영상에 적합합니다.
     </div>
@@ -708,7 +770,8 @@
         <ul>
           <li>Empty 선택 → 프레임 1 → 3D Viewport 위에서 <kbd>I</kbd> 키 → 팝업 메뉴에서 Rotation 선택<br>
             <em style="color:var(--dim)">※ Empty는 Puppet이 아니므로 Keyframe Tools 대신 Blender 기본 <kbd>I</kbd> 키 사용</em></li>
-          <li>프레임 120 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>360</code> → <kbd>Enter</kbd> → <kbd>I</kbd> → Rotation</li>
+          <li>프레임 60 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> → <kbd>Enter</kbd> → <kbd>I</kbd> → Rotation</li>
+              <li>프레임 120 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> → <kbd>Enter</kbd> → <kbd>I</kbd> → Rotation</li>
         </ul>
       </li>
       <li>Graph Editor에서 Linear 보간으로 변경</li>
