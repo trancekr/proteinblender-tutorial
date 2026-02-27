@@ -563,23 +563,45 @@
   <p>Pose 사이를 부드럽게 전환하는 애니메이션을 만듭니다. Blender가 키프레임 사이를 자동으로 보간합니다.</p>
 
   <div class="card">
+    <h3>키프레임 삽입 방법 (2가지)</h3>
+    <table>
+      <tr><th>방법</th><th>위치</th><th>설명</th></tr>
+      <tr>
+        <td><strong>방법 A (권장)</strong></td>
+        <td>사이드바 → <strong>Keyframe Tools</strong> 패널</td>
+        <td><strong>"Create Keyframe"</strong> 버튼 클릭. ProteinBlender가 선택된 Puppet의 위치/회전/크기를 현재 프레임에 자동으로 기록합니다.</td>
+      </tr>
+      <tr>
+        <td><strong>방법 B (Blender 기본)</strong></td>
+        <td>3D Viewport 위에서 <kbd>I</kbd> 키</td>
+        <td>팝업 메뉴에서 <strong>"Location Rotation Scale"</strong> 선택. 마우스가 반드시 3D Viewport(단백질이 보이는 영역) 안에 있어야 합니다.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
     <h3>기본 애니메이션 만들기</h3>
     <ol>
       <li>타임라인에서 <strong>프레임 1</strong>로 이동</li>
       <li>Puppet 선택 → 시작 위치(Pose) 배치</li>
-      <li><kbd>I</kbd> 키 → <strong>"Location Rotation Scale"</strong> 선택 → 키프레임 삽입</li>
+      <li>Keyframe Tools → <strong>"Create Keyframe"</strong> 클릭 (시작점 기록)</li>
       <li>타임라인에서 <strong>프레임 60</strong>으로 이동</li>
       <li>Puppet을 새 위치로 이동/회전</li>
-      <li><kbd>I</kbd> 키 → 다시 키프레임 삽입</li>
+      <li>다시 <strong>"Create Keyframe"</strong> 클릭 (끝점 기록)</li>
       <li><kbd>Space</kbd>로 재생하여 결과 확인</li>
     </ol>
+  </div>
+
+  <div class="warn">
+    <strong>키프레임이란?</strong> "이 프레임에서 오브젝트는 이 위치/회전/크기에 있어야 한다"를 기록하는 것입니다.
+    두 키프레임 사이를 Blender가 자동으로 보간하여 부드러운 움직임을 만들어줍니다.
   </div>
 
   <div class="card">
     <h3>Pose 전환 애니메이션</h3>
     <ol>
-      <li>프레임 1 → Pose Library에서 <code>Open_State</code> Apply → <kbd>I</kbd> 키프레임</li>
-      <li>프레임 60 → <code>Closed_State</code> Apply → <kbd>I</kbd> 키프레임</li>
+      <li>프레임 1 → Pose Library에서 <code>Open_State</code> Apply → <strong>"Create Keyframe"</strong></li>
+      <li>프레임 60 → <code>Closed_State</code> Apply → <strong>"Create Keyframe"</strong></li>
       <li>재생하면 열림→닫힘 구조 변화가 부드럽게 전환됨</li>
     </ol>
   </div>
@@ -634,7 +656,7 @@
     <tr><td><kbd>G</kbd></td><td>이동 (Grab)</td></tr>
     <tr><td><kbd>R</kbd></td><td>회전 (Rotate)</td></tr>
     <tr><td><kbd>S</kbd></td><td>크기 조절 (Scale)</td></tr>
-    <tr><td><kbd>I</kbd></td><td>키프레임 삽입</td></tr>
+    <tr><td><kbd>I</kbd></td><td>키프레임 삽입 (3D Viewport 위에서만 작동). 또는 사이드바 Keyframe Tools → Create Keyframe 버튼 사용</td></tr>
     <tr><td><kbd>Space</kbd></td><td>애니메이션 재생/정지</td></tr>
     <tr><td>마우스 가운데 버튼</td><td>뷰포트 회전</td></tr>
     <tr><td><kbd>Shift</kbd> + 가운데 버튼</td><td>뷰포트 이동 (팬)</td></tr>
@@ -657,9 +679,9 @@
       <li><strong>색상 변경</strong>: Visual Setup에서 원하는 색상 선택 (컬러 피커 클릭 시 즉시 적용)<br>
         <em style="color:var(--dim)">※ 뷰포트 셰이딩을 Material Preview (<kbd>Z</kbd>)로 전환해야 색상이 보입니다</em></li>
       <li><strong>Puppet 생성</strong>: Outliner에서 체인 선택 → Create New Puppet → 이름: <code>crambin</code></li>
-      <li><strong>프레임 1</strong>: Puppet 선택 → <kbd>I</kbd> → Location Rotation Scale</li>
+      <li><strong>프레임 1</strong>: Puppet 선택 → Keyframe Tools → <strong>"Create Keyframe"</strong> (시작점 기록)</li>
       <li><strong>프레임 120</strong>으로 이동 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>360</code> 입력 → <kbd>Enter</kbd></li>
-      <li><kbd>I</kbd> → Location Rotation Scale (두 번째 키프레임)</li>
+      <li>다시 <strong>"Create Keyframe"</strong> (끝점 기록)</li>
       <li><kbd>Space</kbd>로 재생 → 360도 회전 확인!</li>
       <li><strong>매끄러운 회전</strong>: Graph Editor 열기 (<kbd>Shift</kbd>+<kbd>F6</kbd>) → 회전 커브 선택 → <kbd>T</kbd> → Linear로 변경</li>
     </ol>
@@ -684,7 +706,8 @@
       </li>
       <li><strong>Empty 회전 애니메이션</strong>:
         <ul>
-          <li>Empty 선택 → 프레임 1 → <kbd>I</kbd> → Rotation</li>
+          <li>Empty 선택 → 프레임 1 → 3D Viewport 위에서 <kbd>I</kbd> 키 → 팝업 메뉴에서 Rotation 선택<br>
+            <em style="color:var(--dim)">※ Empty는 Puppet이 아니므로 Keyframe Tools 대신 Blender 기본 <kbd>I</kbd> 키 사용</em></li>
           <li>프레임 120 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>360</code> → <kbd>Enter</kbd> → <kbd>I</kbd> → Rotation</li>
         </ul>
       </li>
@@ -775,8 +798,8 @@
       </li>
       <li><strong>조립 애니메이션</strong>:
         <ul>
-          <li>프레임 1: <code>Exploded</code> Pose Apply → 모든 Puppet 선택 → <kbd>I</kbd> → LocRotScale</li>
-          <li>프레임 90: <code>Assembled</code> Pose Apply → <kbd>I</kbd> → LocRotScale</li>
+          <li>프레임 1: <code>Exploded</code> Pose Apply → 모든 Puppet 선택 → <strong>"Create Keyframe"</strong></li>
+          <li>프레임 90: <code>Assembled</code> Pose Apply → <strong>"Create Keyframe"</strong></li>
           <li>프레임 90~150: 정지 상태 유지 (같은 키프레임 복사)</li>
         </ul>
       </li>
@@ -800,14 +823,15 @@
       <li><strong>카메라 설정</strong>:
         <ul>
           <li>카메라를 전체 구조가 보이는 원거리 위치에 배치</li>
-          <li>프레임 1: 카메라 위치 키프레임 (<kbd>I</kbd> → Location)</li>
+          <li>프레임 1: 카메라 위치 키프레임 (3D Viewport 위에서 <kbd>I</kbd> → Location)<br>
+            <em style="color:var(--dim)">※ 카메라는 Puppet이 아니므로 Blender 기본 <kbd>I</kbd> 키 사용</em></li>
         </ul>
       </li>
       <li><strong>줌인 카메라 이동</strong>:
         <ul>
           <li>프레임 60: 카메라를 활성 부위 근처로 이동 (<kbd>G</kbd>로 전진)</li>
           <li>카메라 뷰(<kbd>Numpad 0</kbd>)에서 리간드가 화면 중앙에 크게 보이도록 조정</li>
-          <li><kbd>I</kbd> → Location 키프레임 삽입</li>
+          <li>3D Viewport 위에서 <kbd>I</kbd> → Location 키프레임 삽입</li>
         </ul>
       </li>
       <li>프레임 60~120: 줌인 상태에서 카메라를 약간 회전하여 활성 부위를 다양한 각도로 보여줌</li>
