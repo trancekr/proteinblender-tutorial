@@ -479,10 +479,15 @@
     <ol>
       <li><strong>Protein Outliner</strong>에서 색상을 바꿀 체인/도메인 선택</li>
       <li><strong>Visual Setup</strong> 패널로 이동</li>
-      <li>컬러 피커에서 원하는 색상 선택</li>
-      <li><strong>"Apply Color"</strong> 클릭</li>
+      <li>컬러 피커에서 원하는 색상 클릭 — <strong>별도 버튼 없이 즉시 적용됩니다</strong> (라이브 업데이트)</li>
       <li>표현 스타일 드롭다운에서 원하는 스타일 변경</li>
     </ol>
+  </div>
+
+  <div class="warn">
+    <strong>색상이 안 바뀌는 경우?</strong> → 뷰포트 셰이딩 모드를 확인하세요!<br>
+    ProteinBlender의 색상은 Geometry Nodes로 적용되므로 <strong>Solid 모드에서는 색상 변경이 보이지 않습니다</strong>.<br>
+    3D Viewport 오른쪽 상단에서 <strong>세 번째 구체 아이콘 (Material Preview)</strong>을 클릭하거나, <kbd>Z</kbd> 키로 셰이딩 모드를 전환하세요.
   </div>
 
   <div class="tip">
@@ -649,7 +654,8 @@
     <p style="color:var(--dim); margin-bottom:1rem">난이도: 입문 &mdash; 소요시간: ~10분 &mdash; 크램빈은 46 잔기의 작은 단백질로 연습에 최적</p>
     <ol>
       <li><strong>임포트</strong>: Importer → PDB ID에 <code>1CRN</code> 입력 → Fetch from PDB</li>
-      <li><strong>색상 변경</strong>: Visual Setup에서 원하는 색상 선택 → Apply Color</li>
+      <li><strong>색상 변경</strong>: Visual Setup에서 원하는 색상 선택 (컬러 피커 클릭 시 즉시 적용)<br>
+        <em style="color:var(--dim)">※ 뷰포트 셰이딩을 Material Preview (<kbd>Z</kbd>)로 전환해야 색상이 보입니다</em></li>
       <li><strong>Puppet 생성</strong>: Outliner에서 체인 선택 → Create New Puppet → 이름: <code>crambin</code></li>
       <li><strong>프레임 1</strong>: Puppet 선택 → <kbd>I</kbd> → Location Rotation Scale</li>
       <li><strong>프레임 120</strong>으로 이동 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>360</code> 입력 → <kbd>Enter</kbd></li>
@@ -717,7 +723,7 @@
         <ul>
           <li>HEM 도메인 선택</li>
           <li>Visual Setup → <strong>Ball &amp; Stick</strong>으로 변경</li>
-          <li>색상을 빨간색 계열로 변경 → Apply Color</li>
+          <li>색상을 빨간색 계열로 변경 (컬러 피커에서 선택 시 즉시 적용)</li>
         </ul>
       </li>
       <li>결과: 단백질 전체는 파란 Cartoon, 헴만 빨간 Ball &amp; Stick으로 대비</li>
@@ -742,7 +748,7 @@
           <tr><td>C</td><td>α2</td><td>하늘색 (#7AB8E0)</td></tr>
           <tr><td>D</td><td>β2</td><td>분홍색 (#E07A7A)</td></tr>
         </table>
-        Outliner에서 체인 하나씩 선택 → 색상 지정 → Apply Color
+        Outliner에서 체인 하나씩 선택 → 컬러 피커에서 색상 선택 (즉시 적용)
       </li>
       <li><strong>Puppet 4개 생성</strong>: 각 체인을 개별 Puppet으로 생성
         <ul>
