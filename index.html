@@ -468,11 +468,23 @@
   <div class="card">
     <h3>ProteinBlender 패널 위치 (중요!)</h3>
     <p style="color:var(--dim); margin-bottom:1rem">ProteinBlender의 패널은 3D Viewport의 <kbd>N</kbd> 키 사이드바가 <strong>아니라</strong>, Properties Editor(화면 오른쪽)의 <strong>Scene 탭</strong>에 있습니다.</p>
+
+    <h4 style="color:var(--accent); margin-bottom:0.5rem">패널 찾아가기</h4>
     <ol>
-      <li>화면 오른쪽의 <strong>Properties Editor</strong> 확인 (ProteinBlender 워크스페이스에서 오른쪽 30% 영역)</li>
-      <li>Properties Editor 상단의 탭 아이콘 중 <strong>원뿔 모양(Scene Properties)</strong> 클릭</li>
-      <li>아래로 스크롤하면 ProteinBlender 패널이 순서대로 나열됩니다:</li>
+      <li>화면 오른쪽의 <strong>Properties Editor</strong> 확인 (ProteinBlender 워크스페이스에서 오른쪽 영역)
+        <ul><li>세로로 작은 아이콘들이 나열된 패널이 Properties Editor입니다</li></ul>
+      </li>
+      <li>Properties Editor 왼쪽 가장자리에 세로로 배열된 <strong>탭 아이콘</strong>들이 있음:
+        <ul>
+          <li>🔧 Active Tool → 📷 Render → <strong>🖨️ Output (프린터)</strong> → 🎬 View Layer → <strong>🔻 Scene (원뿔)</strong> → 🌍 World → ...</li>
+          <li><span style="color:var(--red)"><strong>Output(프린터)이 아니라 Scene(원뿔)을 클릭!</strong></span><br>
+          Format / Frame Range / Stereoscopy가 보이면 Output 탭에 있는 것입니다.</li>
+        </ul>
+      </li>
+      <li><strong>원뿔 아이콘(Scene Properties)</strong> 클릭 후 <strong>아래로 스크롤</strong>하면 ProteinBlender 패널이 순서대로 나열됩니다</li>
     </ol>
+
+    <h4 style="color:var(--accent); margin:1rem 0 0.5rem">ProteinBlender 패널 목록 (Scene 탭 안에 있음)</h4>
     <table style="margin-top:0.5rem">
       <tr><th>순서</th><th>패널 이름</th><th>기능</th></tr>
       <tr><td>1</td><td><strong>Protein Import</strong></td><td>PDB/AlphaFold에서 구조 임포트</td></tr>
@@ -483,9 +495,14 @@
       <tr><td>6</td><td><strong>Protein Pose Library</strong></td><td>포즈 저장/적용</td></tr>
       <tr><td>7</td><td><strong>Animate Scene</strong></td><td>키프레임 생성, 프레임 범위, Cyclic 설정</td></tr>
     </table>
-    <div class="tip" style="margin-top:0.8rem">
+
+    <div class="warn" style="margin-top:0.8rem">
+      <strong>흔한 실수:</strong> Properties Editor에서 <strong>Output Properties(프린터 아이콘)</strong>를 Scene Properties(원뿔 아이콘)과 혼동하는 경우가 많습니다.<br>
+      "Format, Frame Range, Stereoscopy, Output, Metadata, Post Processing" 항목이 보이면 — 그것은 <strong>Output 탭</strong>입니다. 한 칸 아래의 원뿔 아이콘을 클릭하세요.
+    </div>
+    <div class="tip" style="margin-top:0.5rem">
       패널이 접혀 있을 수 있습니다. 각 패널의 <strong>▶ 화살표</strong>를 클릭하면 내용이 펼쳐집니다.
-      Scene 탭에는 Blender 기본 패널도 함께 있으므로, ProteinBlender 패널을 찾으려면 <strong>스크롤</strong>이 필요할 수 있습니다.
+      Scene 탭에는 Blender 기본 패널(Scene, Units, Gravity 등)도 함께 있으므로, ProteinBlender 패널을 찾으려면 <strong>아래로 스크롤</strong>이 필요합니다.
     </div>
   </div>
 </section>
