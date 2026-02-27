@@ -455,8 +455,38 @@
   </div>
 
   <div class="info">
-    ProteinBlender를 설치하면 Blender 실행 시 전용 워크스페이스가 자동으로 로드됩니다.
-    오른쪽 사이드바가 안 보이면 3D Viewport에서 <kbd>N</kbd> 키를 누르세요.
+    ProteinBlender를 설치하면 Blender 실행 시 전용 워크스페이스 탭(<strong>"Protein Blender"</strong>)이 자동으로 생성됩니다.
+    이 워크스페이스는 왼쪽 70%에 3D Viewport, 오른쪽 30%에 <strong>Properties Editor</strong>가 배치되어 있습니다.
+  </div>
+
+  <div class="warn">
+    <strong>ProteinBlender 패널은 <kbd>N</kbd> 키 사이드바가 아닙니다!</strong><br>
+    ProteinBlender의 모든 패널(Importer, Visual Setup, Puppet Maker 등)은 <strong>Properties Editor의 Scene 탭 (원뿔 🔻 아이콘)</strong>에 세로로 나열됩니다.
+    <kbd>N</kbd> 키를 눌러도 나오지 않으니, 오른쪽 Properties 패널에서 원뿔 아이콘을 클릭하고 <strong>아래로 스크롤</strong>하세요.
+  </div>
+
+  <div class="card">
+    <h3>ProteinBlender 패널 위치 (중요!)</h3>
+    <p style="color:var(--dim); margin-bottom:1rem">ProteinBlender의 패널은 3D Viewport의 <kbd>N</kbd> 키 사이드바가 <strong>아니라</strong>, Properties Editor(화면 오른쪽)의 <strong>Scene 탭</strong>에 있습니다.</p>
+    <ol>
+      <li>화면 오른쪽의 <strong>Properties Editor</strong> 확인 (ProteinBlender 워크스페이스에서 오른쪽 30% 영역)</li>
+      <li>Properties Editor 상단의 탭 아이콘 중 <strong>원뿔 모양(Scene Properties)</strong> 클릭</li>
+      <li>아래로 스크롤하면 ProteinBlender 패널이 순서대로 나열됩니다:</li>
+    </ol>
+    <table style="margin-top:0.5rem">
+      <tr><th>순서</th><th>패널 이름</th><th>기능</th></tr>
+      <tr><td>1</td><td><strong>Protein Import</strong></td><td>PDB/AlphaFold에서 구조 임포트</td></tr>
+      <tr><td>2</td><td><strong>Protein Outliner</strong></td><td>체인/도메인 목록 및 선택</td></tr>
+      <tr><td>3</td><td><strong>Visual Set-up</strong></td><td>색상, 표현 스타일(Cartoon/Surface 등) 변경</td></tr>
+      <tr><td>4</td><td><strong>Domain Maker</strong></td><td>도메인 분할/생성</td></tr>
+      <tr><td>5</td><td><strong>Protein Puppet Maker</strong></td><td>체인을 Puppet으로 그룹핑</td></tr>
+      <tr><td>6</td><td><strong>Protein Pose Library</strong></td><td>포즈 저장/적용</td></tr>
+      <tr><td>7</td><td><strong>Animate Scene</strong></td><td>키프레임 생성, 프레임 범위, Cyclic 설정</td></tr>
+    </table>
+    <div class="tip" style="margin-top:0.8rem">
+      패널이 접혀 있을 수 있습니다. 각 패널의 <strong>▶ 화살표</strong>를 클릭하면 내용이 펼쳐집니다.
+      Scene 탭에는 Blender 기본 패널도 함께 있으므로, ProteinBlender 패널을 찾으려면 <strong>스크롤</strong>이 필요할 수 있습니다.
+    </div>
   </div>
 </section>
 
@@ -464,7 +494,7 @@
 <section id="step1">
   <h2><span class="step-num s1">1</span> 단백질 구조 임포트</h2>
 
-  <p>Importer 패널에서 단백질 구조를 불러옵니다. 세 가지 방법이 있습니다.</p>
+  <p><strong>Protein Import</strong> 패널에서 단백질 구조를 불러옵니다. 세 가지 방법이 있습니다.</p>
 
   <table>
     <tr><th>방법</th><th>입력</th><th>설명</th></tr>
@@ -488,7 +518,7 @@
   <div class="card">
     <h3>따라하기</h3>
     <ol>
-      <li>사이드바의 <strong>Importer</strong> 탭 클릭</li>
+      <li>Properties Editor → Scene 탭(원뿔 아이콘)에서 <strong>Protein Import</strong> 패널 찾기</li>
       <li>PDB ID 입력란에 <code>1CRN</code> 입력</li>
       <li><strong>"Fetch from PDB"</strong> 클릭</li>
       <li>3D 뷰포트에 Cartoon 스타일로 단백질이 나타남</li>
@@ -630,7 +660,7 @@
       <tr><th>방법</th><th>위치</th><th>설명</th></tr>
       <tr>
         <td><strong>방법 A (권장)</strong></td>
-        <td>사이드바 → <strong>Keyframe Tools</strong> 패널</td>
+        <td>Properties Editor → Scene 탭 → <strong>Animate Scene</strong> 패널</td>
         <td><strong>"Create Keyframe"</strong> 버튼 클릭. ProteinBlender가 선택된 Puppet의 위치/회전/크기를 현재 프레임에 자동으로 기록합니다.</td>
       </tr>
       <tr>
@@ -646,7 +676,7 @@
     <ol>
       <li>타임라인에서 <strong>프레임 1</strong>로 이동</li>
       <li>Puppet 선택 → 시작 위치(Pose) 배치</li>
-      <li>Keyframe Tools → <strong>"Create Keyframe"</strong> 클릭 (시작점 기록)</li>
+      <li>Animate Scene 패널 → <strong>"Create Keyframe"</strong> 클릭 (시작점 기록)</li>
       <li>타임라인에서 <strong>프레임 60</strong>으로 이동</li>
       <li>Puppet을 새 위치로 이동/회전</li>
       <li>다시 <strong>"Create Keyframe"</strong> 클릭 (끝점 기록)</li>
@@ -714,7 +744,7 @@
       <tr><th>방법</th><th>설명</th></tr>
       <tr>
         <td><strong>ProteinBlender</strong></td>
-        <td>Keyframe Tools → <strong>Manual Frame Range</strong> (Start/End를 1~120) 설정 + <strong>"Cycle Animation"</strong> 체크</td>
+        <td>Animate Scene 패널 → <strong>Manual Frame Range</strong> (Start/End를 1~120) 설정 + <strong>"Cycle Animation"</strong> 체크</td>
       </tr>
       <tr>
         <td><strong>Graph Editor (확실한 방법)</strong></td>
@@ -771,11 +801,11 @@
   <h2>Blender 필수 단축키 요약</h2>
   <table>
     <tr><th>단축키</th><th>기능</th></tr>
-    <tr><td><kbd>N</kbd></td><td>사이드바 토글 (ProteinBlender 패널 표시)</td></tr>
+    <tr><td><kbd>N</kbd></td><td>3D Viewport 사이드바 토글 (Item/Tool/View 탭). ProteinBlender 패널과는 별개</td></tr>
     <tr><td><kbd>G</kbd></td><td>이동 (Grab)</td></tr>
     <tr><td><kbd>R</kbd></td><td>회전 (Rotate)</td></tr>
     <tr><td><kbd>S</kbd></td><td>크기 조절 (Scale)</td></tr>
-    <tr><td><kbd>I</kbd></td><td>키프레임 삽입 (3D Viewport 위에서만 작동). 또는 사이드바 Keyframe Tools → Create Keyframe 버튼 사용</td></tr>
+    <tr><td><kbd>I</kbd></td><td>키프레임 삽입 (3D Viewport 위에서만 작동). 또는 Properties → Scene → Animate Scene 패널의 Create Keyframe 버튼 사용</td></tr>
     <tr><td><kbd>Space</kbd></td><td>애니메이션 재생/정지</td></tr>
     <tr><td>마우스 가운데 버튼</td><td>뷰포트 회전</td></tr>
     <tr><td><kbd>Shift</kbd> + 가운데 버튼</td><td>뷰포트 이동 (팬)</td></tr>
@@ -794,11 +824,11 @@
     <h3>예제 A-1: 크램빈(1CRN) 360도 회전</h3>
     <p style="color:var(--dim); margin-bottom:1rem">난이도: 입문 &mdash; 소요시간: ~10분 &mdash; 크램빈은 46 잔기의 작은 단백질로 연습에 최적</p>
     <ol>
-      <li><strong>임포트</strong>: Importer → PDB ID에 <code>1CRN</code> 입력 → Fetch from PDB</li>
+      <li><strong>임포트</strong>: Protein Import 패널 → PDB ID에 <code>1CRN</code> 입력 → Fetch from PDB</li>
       <li><strong>색상 변경</strong>: Visual Setup에서 원하는 색상 선택 (컬러 피커 클릭 시 즉시 적용)<br>
         <em style="color:var(--dim)">※ 뷰포트 셰이딩을 Material Preview (<kbd>Z</kbd>)로 전환해야 색상이 보입니다</em></li>
       <li><strong>Puppet 생성</strong>: Outliner에서 체인 선택 → Create New Puppet → 이름: <code>crambin</code></li>
-      <li><strong>프레임 1</strong>: Puppet 선택 → Keyframe Tools → <strong>"Create Keyframe"</strong> (시작점 기록)</li>
+      <li><strong>프레임 1</strong>: Puppet 선택 → Animate Scene → <strong>"Create Keyframe"</strong> (시작점 기록)</li>
       <li><strong>프레임 60</strong>으로 이동 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> 입력 → <kbd>Enter</kbd> → <strong>"Create Keyframe"</strong></li>
       <li><strong>프레임 120</strong>으로 이동 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> 입력 → <kbd>Enter</kbd> → <strong>"Create Keyframe"</strong></li>
       <li><kbd>Shift</kbd>+<kbd>←</kbd>로 프레임 1로 돌아간 후 → <kbd>Space</kbd>로 재생 → 360도 회전 확인!</li>
@@ -832,7 +862,7 @@
       <li><strong>Empty 회전 애니메이션</strong>:
         <ul>
           <li>Empty 선택 → 프레임 1 → 3D Viewport 위에서 <kbd>I</kbd> 키 → 팝업 메뉴에서 Rotation 선택<br>
-            <em style="color:var(--dim)">※ Empty는 Puppet이 아니므로 Keyframe Tools 대신 Blender 기본 <kbd>I</kbd> 키 사용</em></li>
+            <em style="color:var(--dim)">※ Empty는 Puppet이 아니므로 Animate Scene 대신 Blender 기본 <kbd>I</kbd> 키 사용</em></li>
           <li>프레임 60 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> → <kbd>Enter</kbd> → <kbd>I</kbd> → Rotation</li>
               <li>프레임 120 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> → <kbd>Enter</kbd> → <kbd>I</kbd> → Rotation</li>
         </ul>
@@ -1018,7 +1048,7 @@
           <li>결과 파일: <code>output/prediction.pdb</code> (B-factor 컬럼에 pLDDT 점수 저장됨)</li>
         </ul>
       </li>
-      <li><strong>임포트</strong>: Importer → 폴더 아이콘 → <code>prediction.pdb</code> 선택</li>
+      <li><strong>임포트</strong>: Protein Import 패널 → 폴더 아이콘 → <code>prediction.pdb</code> 선택</li>
       <li><strong>pLDDT 색상 스킴 적용</strong>: 도메인/영역별로 수동 색상 지정
         <table style="margin:0.5rem 0">
           <tr><th>pLDDT 범위</th><th>의미</th><th>색상</th><th>Hex</th></tr>
