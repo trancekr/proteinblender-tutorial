@@ -330,6 +330,7 @@
 
 <nav>
   <span class="logo">ProteinBlender Tutorial</span>
+  <a href="#prereq">사전 준비</a>
   <a href="#overview">개요</a>
   <a href="#step1">1. Import</a>
   <a href="#step2">2. Visual</a>
@@ -359,6 +360,56 @@
 </div>
 
 <div class="container">
+
+<!-- Prerequisites -->
+<section id="prereq">
+  <h2>시작하기 전에 — Blender 기초 필수</h2>
+
+  <div class="warn" style="font-size:1rem; padding:1.2rem 1.5rem">
+    <strong>이 튜토리얼은 Blender 기초 지식이 있다는 전제로 작성되었습니다.</strong><br>
+    Blender를 처음 접하는 분은 아래 항목을 먼저 익히고 오세요.
+    그렇지 않으면 ProteinBlender 자체보다 Blender 조작법에서 막히게 됩니다.
+  </div>
+
+  <div class="card">
+    <h3>최소한 알아야 할 것들</h3>
+    <table>
+      <tr><th>항목</th><th>왜 필요한가</th></tr>
+      <tr>
+        <td><strong>화면 구성</strong><br><span style="color:var(--dim)">3D Viewport, Properties, Timeline, Outliner</span></td>
+        <td>각 패널의 역할과 위치를 모르면 "오른쪽 Properties에서 프린터 아이콘 클릭" 같은 안내를 따라갈 수 없음</td>
+      </tr>
+      <tr>
+        <td><strong>뷰포트 셰이딩 모드</strong><br><span style="color:var(--dim)">Solid / Material Preview / Rendered / Wireframe</span></td>
+        <td>ProteinBlender 색상은 Material Preview 이상에서만 보임. 모드 전환 방법(<kbd>Z</kbd>)을 모르면 "색상이 안 바뀐다"고 착각하게 됨</td>
+      </tr>
+      <tr>
+        <td><strong>오브젝트 선택 · 이동 · 회전</strong><br><span style="color:var(--dim)">좌클릭, <kbd>G</kbd> / <kbd>R</kbd> / <kbd>S</kbd>, 축 제한</span></td>
+        <td>Puppet을 배치하고 포즈를 잡는 데 필수</td>
+      </tr>
+      <tr>
+        <td><strong>키프레임 기본 개념</strong><br><span style="color:var(--dim)">타임라인, 프레임 이동, <kbd>I</kbd> 키 삽입</span></td>
+        <td>애니메이션의 핵심. "프레임 60으로 이동"이 무슨 뜻인지 알아야 함</td>
+      </tr>
+      <tr>
+        <td><strong>Output Properties</strong><br><span style="color:var(--dim)">프린터 아이콘, Frame Range, 해상도</span></td>
+        <td>프레임 범위를 설정하지 않으면 애니메이션이 의도와 다르게 재생됨</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>추천 학습 자료 (30분이면 충분)</h3>
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=nIoXOplUvAw" style="color:var(--accent)">Blender Guru — Blender 4.0 Beginner Tutorial (Part 1)</a> — 인터페이스, 이동/회전/크기 조작 기초</li>
+      <li><a href="https://docs.blender.org/manual/en/latest/interface/index.html" style="color:var(--accent)">Blender 공식 매뉴얼 — Interface</a> — 화면 구성, 에디터 종류 레퍼런스</li>
+      <li><a href="https://docs.blender.org/manual/en/latest/animation/keyframes/introduction.html" style="color:var(--accent)">Blender 공식 매뉴얼 — Keyframes</a> — 키프레임 개념과 삽입 방법</li>
+    </ul>
+    <div class="tip" style="margin-top:0.8rem">
+      전체 튜토리얼을 다 볼 필요 없이, 위 표의 5개 항목만 대략 이해하면 이 튜토리얼을 따라갈 수 있습니다.
+    </div>
+  </div>
+</section>
 
 <!-- Overview -->
 <section id="overview">
