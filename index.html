@@ -875,20 +875,33 @@
     <p style="color:var(--dim); margin-bottom:1rem">난이도: 입문 &mdash; 단백질은 고정, 카메라가 주위를 도는 영상. 논문 Supplementary Video에 자주 활용</p>
     <ol>
       <li><code>1CRN</code> 임포트 (위 예제와 동일)</li>
-      <li><strong>빈 오브젝트 추가</strong>: <kbd>Shift</kbd>+<kbd>A</kbd> → Empty → Plain Axes → 단백질 중심에 배치</li>
-      <li><strong>카메라 부모 설정</strong>: 카메라 선택 → <kbd>Shift</kbd>로 Empty도 추가 선택 → <kbd>Ctrl</kbd>+<kbd>P</kbd> → Object</li>
-      <li>카메라가 단백질을 바라보도록 위치/각도 조정
+      <li><strong>회전 중심용 Empty 추가</strong>:
         <ul>
-          <li>카메라 선택 → <kbd>Numpad 0</kbd>으로 카메라 뷰 확인</li>
-          <li><kbd>G</kbd> → <kbd>Z</kbd>로 높이, <kbd>G</kbd> → <kbd>Y</kbd>로 거리 조절</li>
+          <li><kbd>Shift</kbd>+<kbd>A</kbd> → Empty → Plain Axes — 십자 모양의 더미 오브젝트가 생성됨</li>
+          <li>ProteinBlender는 단백질을 월드 원점(0,0,0)에 배치하므로, Empty도 원점에 그대로 두면 됨</li>
+          <li>만약 위치가 어긋나 있으면: Empty 선택 → <kbd>Alt</kbd>+<kbd>G</kbd> (원점으로 초기화)</li>
         </ul>
       </li>
-      <li><strong>Empty 회전 애니메이션</strong>:
+      <li><strong>카메라를 Empty의 자식으로 설정</strong> (선택 순서가 중요!):
         <ul>
-          <li>Empty 선택 → 프레임 1 → 3D Viewport 위에서 <kbd>I</kbd> 키 → 팝업 메뉴에서 Rotation 선택<br>
+          <li>먼저 <strong>카메라</strong>를 좌클릭 (자식이 될 오브젝트)</li>
+          <li><kbd>Shift</kbd>를 누른 채 <strong>Empty</strong>를 좌클릭 (부모가 될 오브젝트 — 밝은 주황색으로 Active 표시)</li>
+          <li><kbd>Ctrl</kbd>+<kbd>P</kbd> → <strong>Object</strong> 선택</li>
+          <li>성공하면 Outliner에서 카메라가 Empty 아래에 들여쓰기됨</li>
+        </ul>
+      </li>
+      <li><strong>카메라 위치 조정</strong> (단백질이 화면에 잘 보이도록):
+        <ul>
+          <li>카메라 선택 → <kbd>Numpad 0</kbd>으로 카메라 시점 확인</li>
+          <li><kbd>G</kbd> → <kbd>Y</kbd>로 카메라 거리 조절, <kbd>G</kbd> → <kbd>Z</kbd>로 높이 조절</li>
+        </ul>
+      </li>
+      <li><strong>Empty 회전 애니메이션</strong> (Empty를 돌리면 카메라가 단백질 주위를 공전):
+        <ul>
+          <li>Empty 선택 → 프레임 1 → 3D Viewport 위에서 <kbd>I</kbd> 키 → Rotation 선택<br>
             <em style="color:var(--dim)">※ Empty는 Puppet이 아니므로 Animate Scene 대신 Blender 기본 <kbd>I</kbd> 키 사용</em></li>
           <li>프레임 60 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> → <kbd>Enter</kbd> → <kbd>I</kbd> → Rotation</li>
-              <li>프레임 120 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> → <kbd>Enter</kbd> → <kbd>I</kbd> → Rotation</li>
+          <li>프레임 120 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> → <kbd>Enter</kbd> → <kbd>I</kbd> → Rotation</li>
         </ul>
       </li>
       <li>Graph Editor에서 Linear 보간으로 변경</li>
