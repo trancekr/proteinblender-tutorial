@@ -342,6 +342,7 @@
   <a href="#examples">예제 모음</a>
   <a href="#scene">씬 세팅</a>
   <a href="#panel-location">패널 위치</a>
+  <a href="#troubleshoot">문제 해결</a>
 </nav>
 
 <!-- Hero -->
@@ -496,7 +497,7 @@
     <ol>
       <li>Properties Editor → Scene 탭(원뿔 아이콘)에서 <strong>Protein Import</strong> 패널 찾기</li>
       <li>PDB ID 입력란에 <code>1CRN</code> 입력</li>
-      <li><strong>"Fetch from PDB"</strong> 클릭</li>
+      <li><strong>"Download"</strong> 클릭</li>
       <li>3D 뷰포트에 Cartoon 스타일로 단백질이 나타남</li>
     </ol>
   </div>
@@ -504,6 +505,12 @@
   <div class="tip">
     처음 연습할 때는 <code>1CRN</code> (46 잔기, 아주 작음)이 가장 좋습니다.
     큰 단백질 (1000+ 잔기)은 임포트에 30~60초 걸릴 수 있습니다.
+  </div>
+
+  <div class="warn">
+    <strong>"Failed to import"</strong> 에러가 나타나면
+    <a href="#troubleshoot" style="color:var(--accent)">문제 해결 가이드</a>를 참고하세요.
+    가장 흔한 원인은 Blender의 "Allow Online Access" 설정이 꺼져 있는 경우입니다.
   </div>
 </section>
 
@@ -841,7 +848,7 @@
     <h3>예제 A-1: 크램빈(1CRN) 360도 회전</h3>
     <p style="color:var(--dim); margin-bottom:1rem">난이도: 입문 &mdash; 소요시간: ~10분 &mdash; 크램빈은 46 잔기의 작은 단백질로 연습에 최적</p>
     <ol>
-      <li><strong>임포트</strong>: Protein Import 패널 → PDB ID에 <code>1CRN</code> 입력 → Fetch from PDB</li>
+      <li><strong>임포트</strong>: Protein Import 패널 → PDB ID에 <code>1CRN</code> 입력 → Download</li>
       <li><strong>색상 변경</strong>: Visual Setup에서 원하는 색상 선택 (컬러 피커 클릭 시 즉시 적용)<br>
         <em style="color:var(--dim)">※ 뷰포트 셰이딩을 Material Preview (<kbd>Z</kbd>)로 전환해야 색상이 보입니다</em></li>
       <li><strong>Puppet 생성</strong>: Outliner에서 체인 선택 → Create New Puppet → 이름: <code>crambin</code></li>
@@ -912,7 +919,7 @@
     <h3>예제 B-1: 미오글로빈 — 리간드 하이라이트</h3>
     <p style="color:var(--dim); margin-bottom:1rem">헴(Heme) 그룹이 포함된 단일 체인 단백질. 리간드만 다른 스타일로 강조하는 법을 배웁니다.</p>
     <ol>
-      <li><strong>임포트</strong>: PDB ID <code>1MBO</code> → Fetch from PDB</li>
+      <li><strong>임포트</strong>: PDB ID <code>1MBO</code> → Download</li>
       <li><strong>전체 스타일</strong>: Visual Setup → <strong>Cartoon</strong> (기본) → 색상을 연한 파란색으로 설정</li>
       <li><strong>헴 그룹 찾기</strong>: Protein Outliner에서 체인 구조를 확장 → 리간드/헤테로아톰(HEM) 도메인 확인</li>
       <li><strong>리간드 스타일 변경</strong>:
@@ -935,7 +942,7 @@
     <h3>예제 B-2: 헤모글로빈 — 멀티 체인 복합체</h3>
     <p style="color:var(--dim); margin-bottom:1rem">4개의 서브유닛(α2β2)을 각각 다른 색상으로 칠하고, 서브유닛 분리 애니메이션을 만듭니다.</p>
     <ol>
-      <li><strong>임포트</strong>: PDB ID <code>2HHB</code> → Fetch from PDB</li>
+      <li><strong>임포트</strong>: PDB ID <code>2HHB</code> → Download</li>
       <li><strong>체인별 색상 지정</strong>:
         <table style="margin:0.5rem 0">
           <tr><th>체인</th><th>서브유닛</th><th>추천 색상</th></tr>
@@ -985,7 +992,7 @@
     <h3>예제 B-3: SARS-CoV-2 프로테아제 — 활성 부위 줌인</h3>
     <p style="color:var(--dim); margin-bottom:1rem">효소의 전체 구조를 보여준 후 활성 부위로 카메라가 줌인하는 애니메이션.</p>
     <ol>
-      <li><strong>임포트</strong>: PDB ID <code>6LU7</code> → Fetch from PDB</li>
+      <li><strong>임포트</strong>: PDB ID <code>6LU7</code> → Download</li>
       <li><strong>시각화</strong>:
         <ul>
           <li>전체: Cartoon, 연한 회색 (#B0B0B0)</li>
@@ -1021,7 +1028,7 @@
     <h3>예제 B-4: 스파이크 단백질 — 도메인 분리 (Exploded View)</h3>
     <p style="color:var(--dim); margin-bottom:1rem">SARS-CoV-2 스파이크의 3량체(trimer) 구조를 도메인별로 분리하는 교육용 애니메이션.</p>
     <ol>
-      <li><strong>임포트</strong>: PDB ID <code>6VYB</code> → Fetch from PDB (약 30~60초 소요, 큰 구조)</li>
+      <li><strong>임포트</strong>: PDB ID <code>6VYB</code> → Download (약 30~60초 소요, 큰 구조)</li>
       <li><strong>3개 체인 색상 구분</strong>:
         <ul>
           <li>Chain A: 초록색, Chain B: 주황색, Chain C: 보라색</li>
@@ -1445,6 +1452,67 @@
       패널이 접혀 있을 수 있습니다. 각 패널의 <strong>▶ 화살표</strong>를 클릭하면 내용이 펼쳐집니다.
       Scene 탭에는 Blender 기본 패널(Scene, Units, Gravity 등)도 함께 있으므로, ProteinBlender 패널을 찾으려면 <strong>아래로 스크롤</strong>이 필요합니다.
     </div>
+  </div>
+</section>
+
+<!-- Troubleshooting -->
+<section id="troubleshoot">
+  <h2>부록: 문제 해결 (Troubleshooting)</h2>
+
+  <div class="card">
+    <h3>"Failed to import" 에러</h3>
+    <p>Download 버튼을 눌렀을 때 Blender 하단 상태 바에 <code>Failed to import: 1CRN</code> 같은 에러가 표시되는 경우:</p>
+
+    <h4 style="margin-top:1rem; color:var(--orange)">1. Allow Online Access 확인 (가장 흔한 원인)</h4>
+    <p>Blender 4.2+에서는 확장 프로그램의 인터넷 접근이 기본적으로 제한됩니다.</p>
+    <ol>
+      <li><strong>Edit → Preferences</strong> (macOS: <strong>Blender → Settings</strong>)</li>
+      <li>왼쪽 메뉴에서 <strong>System</strong> 클릭</li>
+      <li><strong>Network</strong> 섹션에서 <strong>"Allow Online Access"</strong> 체크박스 활성화</li>
+      <li>Preferences 창 닫기 → Download 재시도</li>
+    </ol>
+
+    <h4 style="margin-top:1rem; color:var(--orange)">2. 실제 에러 메시지 확인 (macOS)</h4>
+    <p>ProteinBlender는 에러 상세 메시지를 콘솔에 출력하지만, macOS에서는 기본적으로 보이지 않습니다.</p>
+    <ol>
+      <li><strong>Terminal</strong> 앱 열기 (Spotlight에서 "Terminal" 검색)</li>
+      <li>아래 명령어로 Blender 실행:
+        <br><code style="background:var(--bg);padding:0.3rem 0.6rem;border-radius:4px;display:inline-block;margin-top:0.3rem">/Applications/Blender.app/Contents/MacOS/Blender</code>
+      </li>
+      <li>ProteinBlender에서 Download 다시 시도</li>
+      <li>Terminal에 출력된 에러 메시지 확인 — <code>Failed to import PDB 1CRN: ...</code> 형태</li>
+    </ol>
+
+    <h4 style="margin-top:1rem; color:var(--orange)">3. 포맷 변경 시도</h4>
+    <p>기본 포맷(PDB)으로 다운로드가 안 되면, Protein Import 패널에서 포맷을 <strong>mmCIF</strong>로 변경 후 재시도해 보세요.
+       RCSB에서 일부 구조는 PDB 포맷이 제공되지 않을 수 있습니다.</p>
+
+    <h4 style="margin-top:1rem; color:var(--orange)">4. ProteinBlender 재설치</h4>
+    <p>위 방법으로도 해결되지 않으면 ProteinBlender 확장을 제거 후 재설치해 보세요:
+       Edit → Preferences → Get Extensions → Installed → ProteinBlender 제거 → 재설치</p>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <h3>기타 자주 묻는 질문</h3>
+    <table>
+      <tr><th>증상</th><th>원인 / 해결</th></tr>
+      <tr>
+        <td>ProteinBlender 패널이 안 보임</td>
+        <td>Properties Editor → <strong>Scene 탭</strong>(원뿔 아이콘)에서 아래로 스크롤. <a href="#panel-location" style="color:var(--accent)">패널 위치 가이드</a> 참고</td>
+      </tr>
+      <tr>
+        <td>임포트 후 3D 뷰에 아무것도 안 보임</td>
+        <td>Numpad <kbd>.</kbd>(마침표) 키로 선택 오브젝트에 포커스. 또는 <kbd>Home</kbd> 키로 전체 보기</td>
+      </tr>
+      <tr>
+        <td>렌더링 결과가 검은 화면</td>
+        <td>조명과 카메라가 설정되었는지 확인. <a href="#scene" style="color:var(--accent)">씬 기본 세팅</a> 참고</td>
+      </tr>
+      <tr>
+        <td>큰 단백질 임포트 시 Blender가 멈춤</td>
+        <td>정상 동작입니다. 1000+ 잔기는 30~60초 소요. 진행 바가 없으므로 기다려 주세요</td>
+      </tr>
+    </table>
   </div>
 </section>
 
