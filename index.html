@@ -898,13 +898,14 @@
       </li>
       <li><strong>Empty 회전 애니메이션</strong> (Empty를 돌리면 카메라가 단백질 주위를 공전):
         <ul>
-          <li>Empty 선택 → 프레임 1 → 3D Viewport 위에서 <kbd>I</kbd> 키 → Rotation 선택<br>
-            <em style="color:var(--dim)">※ Empty는 Puppet이 아니므로 Animate Scene 대신 Blender 기본 <kbd>I</kbd> 키 사용</em></li>
-          <li>프레임 60 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> → <kbd>Enter</kbd> → <kbd>I</kbd> → Rotation</li>
-          <li>프레임 120 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> → <kbd>Enter</kbd> → <kbd>I</kbd> → Rotation</li>
+          <li>Empty 선택 → 프레임 1 → 3D Viewport 위에서 <kbd>K</kbd> 키 → <strong>Rotation</strong> 선택<br>
+            <em style="color:var(--dim)">※ Blender 4.1+에서는 <kbd>I</kbd>가 아닌 <kbd>K</kbd> 키로 키프레임 메뉴를 열어야 합니다.
+            <kbd>I</kbd> 키는 메뉴 없이 Location+Rotation+Scale을 한꺼번에 삽입합니다.</em></li>
+          <li>프레임 60 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> → <kbd>Enter</kbd> → <kbd>K</kbd> → Rotation</li>
+          <li>프레임 120 → <kbd>R</kbd> → <kbd>Z</kbd> → <code>180</code> → <kbd>Enter</kbd> → <kbd>K</kbd> → Rotation</li>
         </ul>
       </li>
-      <li>Graph Editor에서 Linear 보간으로 변경</li>
+      <li>Graph Editor (<kbd>Shift</kbd>+<kbd>F6</kbd>) → 커브 선택 → <kbd>T</kbd> → Linear 보간으로 변경</li>
       <li><kbd>Ctrl</kbd>+<kbd>F12</kbd>로 렌더링 → 카메라가 단백질 주위를 부드럽게 공전</li>
     </ol>
     <div class="warn" style="margin-top:1rem">
