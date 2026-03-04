@@ -587,8 +587,10 @@
   <div class="warn">
     <strong>리간드(HEM, 약물 등)는 ProteinBlender에서 독립적으로 스타일 변경이 불가합니다.</strong><br>
     ProteinBlender의 도메인 시스템은 단백질 잔기 범위만 지원합니다.
-    리간드/헤테로아톰은 Protein Outliner에 표시되지 않으며, 별도로 색상이나 스타일을 변경하려면
-    Blender의 Geometry Nodes 또는 Shader Editor를 직접 사용해야 합니다.
+    리간드/헤테로아톰은 Protein Outliner에 표시되지 않으며, 별도로 스타일링하려면
+    Blender의 Geometry Nodes 에디터에서 MolecularNodes의 <code>Select Ligand_</code> 또는
+    <code>Select Res Name</code> 노드로 리간드를 선택한 뒤 <code>Style Ball and Stick</code> 등의
+    스타일 노드를 연결해야 합니다.
   </div>
 
   <div class="tip">
@@ -1026,7 +1028,7 @@
         <ul>
           <li>Protein Outliner에서 <strong>Chain A</strong> 선택</li>
           <li><strong>Domain Maker</strong> 패널 열기 (선택한 체인이 있어야 표시됨)</li>
-          <li>"Split" 버튼 클릭 → Start/End 슬라이더로 원하는 잔기 범위 지정 (예: 1~80)</li>
+          <li>"Split Chain" 버튼 클릭 → Start/End 슬라이더로 원하는 잔기 범위 지정 (예: 1~80)</li>
           <li>확인하면 자동으로 <strong>3개 도메인</strong>이 생성됨: 지정 범위 앞 / 지정 범위 / 지정 범위 뒤<br>
             <em style="color:var(--dim)">※ ProteinBlender는 빈틈 없이 전체 체인을 커버하도록 자동 분할합니다</em></li>
         </ul>
@@ -1044,7 +1046,9 @@
       <strong>리간드(HEM, 약물 분자 등)에 대해:</strong> ProteinBlender의 도메인 시스템은 <strong>단백질 잔기 범위</strong>만 지원합니다.
       헴(HEM) 같은 리간드/헤테로아톰은 Protein Outliner에 별도 도메인으로 표시되지 않으며,
       ProteinBlender UI로는 독립적으로 선택·색상·스타일을 변경할 수 없습니다.
-      리간드를 별도로 스타일링하려면 Blender의 Geometry Nodes 또는 Shader Editor를 직접 사용해야 합니다.
+      리간드를 별도로 스타일링하려면 Geometry Nodes 에디터에서 MolecularNodes의
+      <code>Select Ligand_</code> 또는 <code>Select Res Name</code> 노드로 선택 후
+      <code>Style Ball and Stick</code> 등의 스타일 노드를 적용해야 합니다.
     </div>
   </div>
 
