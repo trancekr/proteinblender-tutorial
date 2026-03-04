@@ -539,13 +539,18 @@
       <td>큰 복합체의 간결한 표현</td>
     </tr>
     <tr>
-      <td><strong>Ball & Stick</strong></td>
-      <td>원자 수준 상세 표현</td>
-      <td>활성 부위, 리간드 강조</td>
+      <td><strong>Sticks</strong></td>
+      <td>결합을 막대로 표시</td>
+      <td>결합 패턴, 리간드 구조</td>
+    </tr>
+    <tr>
+      <td><strong>Ball &amp; Stick</strong></td>
+      <td>원자 + 결합 상세 표현</td>
+      <td>활성 부위 클로즈업</td>
     </tr>
     <tr>
       <td><strong>Spheres</strong></td>
-      <td>공간 충전 모델</td>
+      <td>van der Waals 공간 충전 모델</td>
       <td>분자 크기/부피 비교</td>
     </tr>
   </table>
@@ -553,11 +558,24 @@
   <div class="card">
     <h3>따라하기</h3>
     <ol>
-      <li><strong>Protein Outliner</strong>에서 색상을 바꿀 체인/도메인 선택</li>
+      <li><strong>셰이딩 모드 전환</strong>: 3D Viewport 우측 상단 → <strong>Material Preview</strong> (세 번째 구체 아이콘) 또는 <kbd>Z</kbd> 키<br>
+        <em style="color:var(--dim)">Solid 모드에서는 색상/스타일 변경이 보이지 않습니다. 반드시 Material Preview 이상으로 전환하세요.</em></li>
+      <li><strong>Protein Outliner</strong>에서 색상을 바꿀 항목의 <strong>체크박스</strong> 선택</li>
       <li><strong>Visual Setup</strong> 패널로 이동</li>
       <li>컬러 피커에서 원하는 색상 클릭 — <strong>별도 버튼 없이 즉시 적용됩니다</strong> (라이브 업데이트)</li>
-      <li>표현 스타일 드롭다운에서 원하는 스타일 변경</li>
+      <li>Representation 드롭다운에서 원하는 스타일 변경</li>
     </ol>
+  </div>
+
+  <div class="card">
+    <h3>색상 적용의 계층 구조</h3>
+    <p style="color:var(--dim)">어떤 항목을 선택하느냐에 따라 색상이 적용되는 범위가 달라집니다:</p>
+    <table>
+      <tr><th>선택 대상</th><th>색상 적용 범위</th></tr>
+      <tr><td><strong>Protein</strong> (최상위)</td><td>단백질 전체 + 모든 체인 + 모든 도메인</td></tr>
+      <tr><td><strong>Chain</strong></td><td>해당 체인 + 소속 도메인 전체</td></tr>
+      <tr><td><strong>Domain</strong></td><td>해당 도메인만</td></tr>
+    </table>
   </div>
 
   <div class="warn">
@@ -566,9 +584,16 @@
     3D Viewport 오른쪽 상단에서 <strong>세 번째 구체 아이콘 (Material Preview)</strong>을 클릭하거나, <kbd>Z</kbd> 키로 셰이딩 모드를 전환하세요.
   </div>
 
+  <div class="warn">
+    <strong>리간드(HEM, 약물 등)는 ProteinBlender에서 독립적으로 스타일 변경이 불가합니다.</strong><br>
+    ProteinBlender의 도메인 시스템은 단백질 잔기 범위만 지원합니다.
+    리간드/헤테로아톰은 Protein Outliner에 표시되지 않으며, 별도로 색상이나 스타일을 변경하려면
+    Blender의 Geometry Nodes 또는 Shader Editor를 직접 사용해야 합니다.
+  </div>
+
   <div class="tip">
     도메인별로 다른 스타일을 적용할 수 있습니다.
-    예: 전체는 Cartoon, 활성 부위만 Ball &amp; Stick으로 표시.
+    Domain Maker로 체인을 여러 도메인으로 분할한 뒤, 각 도메인에 다른 색상/스타일을 지정하세요.
   </div>
 </section>
 
@@ -626,9 +651,14 @@
     <tr><td><strong>Delete</strong></td><td>Pose 삭제 (Puppet은 유지됨)</td></tr>
   </table>
 
+  <div class="warn">
+    <strong>Pose는 위치/회전/크기만 저장합니다.</strong> 색상이나 시각화 스타일은 포함되지 않습니다.
+    색상 전환 애니메이션이 필요하면 키프레임 단계에서 Color 옵션을 사용하세요.
+  </div>
+
   <div class="tip">
     생물학적 상태에 맞는 이름을 쓰세요: <code>ATP_Bound</code>, <code>Substrate_Free</code>, <code>Transition_State</code> 등.
-    Pose는 Blender 파일 안에 Scene별로 저장됩니다.
+    Pose는 Blender 파일(.blend) 안에 Scene별로 저장되며, 다른 .blend 파일로 전달되지 않습니다.
   </div>
 </section>
 
@@ -645,7 +675,15 @@
       <tr>
         <td><strong>방법 A (권장)</strong></td>
         <td>Properties Editor → Scene 탭 → <strong>Animate Scene</strong> 패널</td>
-        <td><strong>"Create Keyframe"</strong> 버튼 클릭. ProteinBlender가 선택된 Puppet의 위치/회전/크기를 현재 프레임에 자동으로 기록합니다.</td>
+        <td><strong>"Create Keyframe"</strong> 버튼 클릭. 대화 상자에서 기록할 항목을 선택합니다:
+          <ul style="margin:0.3rem 0 0; padding-left:1.2rem">
+            <li><strong>Location</strong> — 위치</li>
+            <li><strong>Rotation</strong> — 회전</li>
+            <li><strong>Scale</strong> — 크기</li>
+            <li><strong>Pose</strong> — 도메인 멤버들의 배치</li>
+            <li><strong>Color</strong> — 색상 전환 (체크 시 색상 애니메이션 가능)</li>
+          </ul>
+        </td>
       </tr>
       <tr>
         <td><strong>방법 B (Blender 기본)</strong></td>
@@ -967,7 +1005,7 @@
 
   <table>
     <tr><th>예제</th><th>PDB ID</th><th>단백질</th><th>핵심 기능</th><th>난이도</th></tr>
-    <tr><td>B-1</td><td><code>1MBO</code></td><td>미오글로빈</td><td>단일 체인 + 리간드 (헴) 하이라이트</td><td>입문</td></tr>
+    <tr><td>B-1</td><td><code>1MBO</code></td><td>미오글로빈</td><td>단일 체인 도메인 분할 + 색상 구분</td><td>입문</td></tr>
     <tr><td>B-2</td><td><code>2HHB</code></td><td>헤모글로빈</td><td>4개 체인 복합체 + 멀티 Puppet</td><td>초중급</td></tr>
     <tr><td>B-3</td><td><code>6LU7</code></td><td>SARS-CoV-2 프로테아제</td><td>효소 활성 부위 줌인 애니메이션</td><td>초중급</td></tr>
     <tr><td>B-4</td><td><code>6VYB</code></td><td>SARS-CoV-2 스파이크</td><td>대형 3량체 + 도메인 분리 애니메이션</td><td>중급</td></tr>
@@ -976,24 +1014,37 @@
 
   <!-- Example B-1 -->
   <div class="practice" style="margin-top:2rem">
-    <h3>예제 B-1: 미오글로빈 — 리간드 하이라이트</h3>
-    <p style="color:var(--dim); margin-bottom:1rem">헴(Heme) 그룹이 포함된 단일 체인 단백질. 리간드만 다른 스타일로 강조하는 법을 배웁니다.</p>
+    <h3>예제 B-1: 미오글로빈 — 도메인 분할과 색상 구분</h3>
+    <p style="color:var(--dim); margin-bottom:1rem">단일 체인 단백질을 도메인으로 분할하여 영역별로 다른 색상을 적용하는 법을 배웁니다.</p>
     <ol>
-      <li><strong>임포트</strong>: PDB ID <code>1MBO</code> → Download</li>
-      <li><strong>전체 스타일</strong>: Visual Setup → <strong>Cartoon</strong> (기본) → 색상을 연한 파란색으로 설정</li>
-      <li><strong>헴 그룹 찾기</strong>: Protein Outliner에서 체인 구조를 확장 → 리간드/헤테로아톰(HEM) 도메인 확인</li>
-      <li><strong>리간드 스타일 변경</strong>:
+      <li><strong>임포트</strong>: PDB ID <code>1MBO</code> → Download<br>
+        <em style="color:var(--dim)">※ 1MB"O" (알파벳 O)입니다. 숫자 0이 아닙니다.</em></li>
+      <li><strong>셰이딩 모드 전환</strong>: 3D Viewport 우측 상단 → <strong>Material Preview</strong> (세 번째 구체 아이콘) 또는 <kbd>Z</kbd> 키<br>
+        <em style="color:var(--dim)">Solid 모드에서는 색상 변경이 보이지 않습니다</em></li>
+      <li><strong>전체 색상 변경</strong>: Protein Outliner에서 <strong>Chain A</strong> 체크박스 선택 → Visual Setup → 컬러 피커에서 연한 파란색 선택 (즉시 적용)</li>
+      <li><strong>도메인 분할</strong>: 체인을 영역별로 나누어 다른 색상 적용
         <ul>
-          <li>HEM 도메인 선택</li>
-          <li>Visual Setup → <strong>Ball &amp; Stick</strong>으로 변경</li>
-          <li>색상을 빨간색 계열로 변경 (컬러 피커에서 선택 시 즉시 적용)</li>
+          <li>Protein Outliner에서 <strong>Chain A</strong> 선택</li>
+          <li><strong>Domain Maker</strong> 패널 열기 (선택한 체인이 있어야 표시됨)</li>
+          <li>"Split" 버튼 클릭 → Start/End 슬라이더로 원하는 잔기 범위 지정 (예: 1~80)</li>
+          <li>확인하면 자동으로 <strong>3개 도메인</strong>이 생성됨: 지정 범위 앞 / 지정 범위 / 지정 범위 뒤<br>
+            <em style="color:var(--dim)">※ ProteinBlender는 빈틈 없이 전체 체인을 커버하도록 자동 분할합니다</em></li>
         </ul>
       </li>
-      <li>결과: 단백질 전체는 파란 Cartoon, 헴만 빨간 Ball &amp; Stick으로 대비</li>
+      <li><strong>도메인별 색상 적용</strong>:
+        <ul>
+          <li>Protein Outliner에서 분할된 도메인을 <strong>개별 선택</strong> (체크박스)</li>
+          <li>Visual Setup → 컬러 피커에서 각 도메인마다 다른 색상 선택</li>
+          <li>예: N-말단 도메인은 파란색, C-말단 도메인은 초록색</li>
+        </ul>
+      </li>
+      <li>결과: 같은 체인이라도 도메인별로 구분된 색상으로 표시됨</li>
     </ol>
-    <div class="tip" style="margin-top:1rem">
-      이 기법은 모든 단백질-리간드 복합체에 적용 가능합니다:
-      약물 분자, 보조 인자, 금속 이온 등을 다른 스타일로 구분하면 직관적인 이미지를 만들 수 있습니다.
+    <div class="warn" style="margin-top:1rem">
+      <strong>리간드(HEM, 약물 분자 등)에 대해:</strong> ProteinBlender의 도메인 시스템은 <strong>단백질 잔기 범위</strong>만 지원합니다.
+      헴(HEM) 같은 리간드/헤테로아톰은 Protein Outliner에 별도 도메인으로 표시되지 않으며,
+      ProteinBlender UI로는 독립적으로 선택·색상·스타일을 변경할 수 없습니다.
+      리간드를 별도로 스타일링하려면 Blender의 Geometry Nodes 또는 Shader Editor를 직접 사용해야 합니다.
     </div>
   </div>
 
@@ -1063,7 +1114,7 @@
       <li><strong>카메라 설정</strong>:
         <ul>
           <li>카메라를 전체 구조가 보이는 원거리 위치에 배치</li>
-          <li>프레임 1: 카메라 위치 키프레임 (3D Viewport 위에서 <kbd>I</kbd> → Location)<br>
+          <li>프레임 1: 카메라 위치 키프레임 (3D Viewport 위에서 <kbd>K</kbd> → Location)<br>
             <em style="color:var(--dim)">※ 카메라는 Puppet이 아니므로 Blender 기본 <kbd>I</kbd> 키 사용</em></li>
         </ul>
       </li>
@@ -1071,7 +1122,7 @@
         <ul>
           <li>프레임 60: 카메라를 활성 부위 근처로 이동 (<kbd>G</kbd>로 전진)</li>
           <li>카메라 뷰(<kbd>Numpad 0</kbd>)에서 리간드가 화면 중앙에 크게 보이도록 조정</li>
-          <li>3D Viewport 위에서 <kbd>I</kbd> → Location 키프레임 삽입</li>
+          <li>3D Viewport 위에서 <kbd>K</kbd> → Location 키프레임 삽입</li>
         </ul>
       </li>
       <li>프레임 60~120: 줌인 상태에서 카메라를 약간 회전하여 활성 부위를 다양한 각도로 보여줌</li>
@@ -1133,7 +1184,7 @@
         </ul>
       </li>
       <li><strong>임포트</strong>: Protein Import 패널 → 폴더 아이콘 → <code>prediction.pdb</code> 선택</li>
-      <li><strong>pLDDT 색상 스킴 적용</strong>: 도메인/영역별로 수동 색상 지정
+      <li><strong>pLDDT 색상 스킴 적용</strong>: Domain Maker로 신뢰도 구간별 도메인 분할 → 각 도메인에 색상 수동 지정
         <table style="margin:0.5rem 0">
           <tr><th>pLDDT 범위</th><th>의미</th><th>색상</th><th>Hex</th></tr>
           <tr><td>&gt; 90</td><td>매우 높은 신뢰도</td><td>진한 파란색</td><td><code>#0053D6</code></td></tr>
@@ -1370,7 +1421,7 @@
       <tr><th>PDB ID</th><th>단백질</th><th>크기</th><th>특징</th></tr>
       <tr><td><code>1CRN</code></td><td>크램빈</td><td>46 잔기</td><td>최소 크기, 빠른 테스트용</td></tr>
       <tr><td><code>1UBQ</code></td><td>유비퀴틴</td><td>76 잔기</td><td>단일 도메인, 알파+베타 구조</td></tr>
-      <tr><td><code>1MBO</code></td><td>미오글로빈</td><td>153 잔기</td><td>헴 리간드 포함</td></tr>
+      <tr><td><code>1MBO</code></td><td>미오글로빈</td><td>153 잔기</td><td>단일 체인, 도메인 분할 연습. <em style="color:var(--dim)">※ 1MB"O"(알파벳 O), 숫자 0 아님</em></td></tr>
       <tr><td><code>2HHB</code></td><td>헤모글로빈</td><td>574 잔기 (4체인)</td><td>멀티 체인 복합체</td></tr>
       <tr><td><code>1HHO</code></td><td>디옥시 헤모글로빈</td><td>574 잔기 (4체인)</td><td>2HHB와 비교 → Oxy/Deoxy 전환</td></tr>
       <tr><td><code>6LU7</code></td><td>SARS-CoV-2 Mpro</td><td>306 잔기</td><td>리간드 복합체, 약물 설계 교육</td></tr>
