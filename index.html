@@ -484,7 +484,7 @@
     <tr>
       <td><strong>RCSB PDB</strong></td>
       <td>4자리 PDB ID</td>
-      <td>예: <code>1CRN</code> (크램빈), <code>6LU7</code> (SARS-CoV-2 프로테아제)</td>
+      <td>예: <code>1CRN</code> (크램빈), <code>4HHB</code> (헤모글로빈), <code>3SN6</code> (GPCR+Gs)</td>
     </tr>
     <tr>
       <td><strong>AlphaFold DB</strong></td>
@@ -1007,57 +1007,64 @@
 
   <table>
     <tr><th>예제</th><th>PDB ID</th><th>단백질</th><th>핵심 기능</th><th>난이도</th></tr>
-    <tr><td>B-1</td><td><code>1MBO</code></td><td>미오글로빈</td><td>단일 체인 도메인 분할 + 색상 구분</td><td>입문</td></tr>
-    <tr><td>B-2</td><td><code>2HHB</code></td><td>헤모글로빈</td><td>4개 체인 복합체 + 멀티 Puppet</td><td>초중급</td></tr>
-    <tr><td>B-3</td><td><code>6LU7</code></td><td>SARS-CoV-2 프로테아제</td><td>효소 활성 부위 줌인 애니메이션</td><td>초중급</td></tr>
-    <tr><td>B-4</td><td><code>6VYB</code></td><td>SARS-CoV-2 스파이크</td><td>대형 3량체 + 도메인 분리 애니메이션</td><td>중급</td></tr>
-    <tr><td>B-5</td><td>로컬 .pdb</td><td>OpenFold3 예측 구조</td><td>pLDDT 신뢰도 색상 + 논문 이미지</td><td>중급</td></tr>
+    <tr><td>B-1</td><td><code>2SRC</code></td><td>c-Src 키나제</td><td>단일 체인 → 3개 도메인 분할 (SH3/SH2/Kinase)</td><td>입문</td></tr>
+    <tr><td>B-2</td><td><code>4HHB</code></td><td>헤모글로빈</td><td>4체인 복합체 + 멀티 Puppet 조립 애니메이션</td><td>초중급</td></tr>
+    <tr><td>B-3</td><td><code>3SN6</code></td><td>β2-AR + Gs 단백질</td><td>GPCR 신호전달 복합체 (5체인) + 카메라 줌인</td><td>초중급</td></tr>
+    <tr><td>B-4</td><td><code>3J5P</code></td><td>TRPV1 채널</td><td>막단백질 4량체 Exploded View + 성능 최적화</td><td>중급</td></tr>
   </table>
 
   <!-- Example B-1 -->
   <div class="practice" style="margin-top:2rem">
-    <h3>예제 B-1: 미오글로빈 — 도메인 분할과 색상 구분</h3>
-    <p style="color:var(--dim); margin-bottom:1rem">단일 체인 단백질을 도메인으로 분할하여 영역별로 다른 색상을 적용하는 법을 배웁니다.</p>
+    <h3>예제 B-1: c-Src 키나제 — 도메인 분할과 색상 구분</h3>
+    <p style="color:var(--dim); margin-bottom:1rem">단일 체인 단백질을 생물학적 도메인(SH3 / SH2 / Kinase)으로 분할하여 영역별로 다른 색상을 적용합니다.</p>
+    <div class="note" style="margin-bottom:1rem">
+      <strong>왜 c-Src인가?</strong> c-Src은 최초로 발견된 proto-oncogene 산물로, 하나의 체인에 <strong>3개의 뚜렷한 도메인</strong>(SH3, SH2, Kinase)이 있습니다.
+      비활성 상태에서 SH3와 SH2가 키나제 도메인 위로 접혀 자기억제(autoinhibition) 구조를 형성합니다 — 도메인 색 구분으로 이 구조적 특성을 직관적으로 보여줄 수 있습니다.
+    </div>
     <ol>
-      <li><strong>임포트</strong>: PDB ID <code>1MBO</code> → Download<br>
-        <em style="color:var(--dim)">※ 1MB"O" (알파벳 O)입니다. 숫자 0이 아닙니다.</em></li>
+      <li><strong>임포트</strong>: PDB ID <code>2SRC</code> → Download (450 잔기, 단일 체인)</li>
       <li><strong>셰이딩 모드 전환</strong>: 3D Viewport 우측 상단 → <strong>Material Preview</strong> (세 번째 구체 아이콘) 또는 <kbd>Z</kbd> 키<br>
         <em style="color:var(--dim)">Solid 모드에서는 색상 변경이 보이지 않습니다</em></li>
-      <li><strong>전체 색상 변경</strong>: Protein Outliner에서 <strong>Chain A</strong> 체크박스 선택 → Visual Setup → 컬러 피커에서 연한 파란색 선택 (즉시 적용)</li>
-      <li><strong>도메인 분할</strong>: 체인을 영역별로 나누어 다른 색상 적용
+      <li><strong>전체 색상 변경</strong>: Protein Outliner에서 <strong>Chain A</strong> 체크박스 선택 → Visual Setup → 컬러 피커에서 연한 회색 선택 (기본 바탕색)</li>
+      <li><strong>도메인 분할</strong>: Domain Maker로 3개 생물학적 도메인을 나눕니다
         <ul>
           <li>Protein Outliner에서 <strong>Chain A</strong> 선택</li>
           <li><strong>Domain Maker</strong> 패널 열기 (선택한 체인이 있어야 표시됨)</li>
-          <li>"Split Chain" 버튼 클릭 → Start/End 슬라이더로 원하는 잔기 범위 지정 (예: 1~80)</li>
-          <li>확인하면 자동으로 <strong>3개 도메인</strong>이 생성됨: 지정 범위 앞 / 지정 범위 / 지정 범위 뒤<br>
-            <em style="color:var(--dim)">※ ProteinBlender는 빈틈 없이 전체 체인을 커버하도록 자동 분할합니다</em></li>
+          <li>첫 번째 분할 — <strong>SH3 도메인</strong>: "Split Chain" 버튼 → 잔기 범위 <code>84~145</code> 지정<br>
+            <em style="color:var(--dim)">→ 3개 도메인 자동 생성: N-terminal(~83) / SH3(84~145) / 나머지(146~)</em></li>
+          <li>두 번째 분할 — 나머지 도메인에서 <strong>SH2</strong> 분리: 나머지 도메인 선택 → "Split Chain" → 잔기 범위 <code>151~248</code> 지정<br>
+            <em style="color:var(--dim)">→ 링커(146~150) / SH2(151~248) / Kinase(249~) 으로 분할</em></li>
         </ul>
       </li>
       <li><strong>도메인별 색상 적용</strong>:
-        <ul>
-          <li>Protein Outliner에서 분할된 도메인을 <strong>개별 선택</strong> (체크박스)</li>
-          <li>Visual Setup → 컬러 피커에서 각 도메인마다 다른 색상 선택</li>
-          <li>예: N-말단 도메인은 파란색, C-말단 도메인은 초록색</li>
-        </ul>
+        <table style="margin:0.5rem 0">
+          <tr><th>도메인</th><th>잔기 범위</th><th>추천 색상</th><th>기능</th></tr>
+          <tr><td>SH3</td><td>84 ~ 145</td><td>초록색 (#50C878)</td><td>프롤린-리치 모티프 인식</td></tr>
+          <tr><td>SH2</td><td>151 ~ 248</td><td>주황색 (#E88D3F)</td><td>인산화 티로신 결합</td></tr>
+          <tr><td>Kinase</td><td>270 ~ 523</td><td>파란색 (#4A90D9)</td><td>촉매 도메인 (N-lobe + C-lobe)</td></tr>
+          <tr><td>링커/N-tail</td><td>나머지</td><td>연한 회색 (#B0B0B0)</td><td>연결 부위</td></tr>
+        </table>
+        Protein Outliner에서 각 도메인 체크박스 선택 → Visual Setup 컬러 피커에서 색상 변경 (즉시 적용)
       </li>
-      <li>결과: 같은 체인이라도 도메인별로 구분된 색상으로 표시됨</li>
+      <li>결과: 하나의 체인이지만 SH3(초록), SH2(주황), Kinase(파란)로 명확히 구분된 구조가 보임</li>
     </ol>
-    <div class="warn" style="margin-top:1rem">
-      <strong>리간드(HEM, 약물 분자 등)에 대해:</strong> ProteinBlender의 도메인 시스템은 <strong>단백질 잔기 범위</strong>만 지원합니다.
-      헴(HEM) 같은 리간드/헤테로아톰은 Protein Outliner에 별도 도메인으로 표시되지 않으며,
-      ProteinBlender UI로는 독립적으로 선택·색상·스타일을 변경할 수 없습니다.
-      리간드를 별도로 스타일링하려면 Geometry Nodes 에디터에서 MolecularNodes의
-      <code>Select Ligand_</code> 또는 <code>Select Res Name</code> 노드로 선택 후
-      <code>Style Ball and Stick</code> 등의 스타일 노드를 적용해야 합니다.
+    <div class="tip" style="margin-top:1rem">
+      <strong>스타일도 다르게!</strong> SH3와 SH2를 <strong>Ribbon</strong>, Kinase를 <strong>Cartoon</strong>으로 설정하면 도메인 크기 차이가 더욱 극적으로 보입니다.
+      Visual Setup → Representation 드롭다운에서 도메인별로 스타일을 변경할 수 있습니다.
     </div>
   </div>
 
   <!-- Example B-2 -->
   <div class="practice">
-    <h3>예제 B-2: 헤모글로빈 — 멀티 체인 복합체</h3>
-    <p style="color:var(--dim); margin-bottom:1rem">4개의 서브유닛(α2β2)을 각각 다른 색상으로 칠하고, 서브유닛 분리 애니메이션을 만듭니다.</p>
+    <h3>예제 B-2: 헤모글로빈 — 멀티 체인 조립 애니메이션</h3>
+    <p style="color:var(--dim); margin-bottom:1rem">4개의 서브유닛(α2β2)을 각각 다른 색상으로 칠하고, 분리 → 조립 애니메이션을 만듭니다.</p>
+    <div class="note" style="margin-bottom:1rem">
+      <strong>왜 헤모글로빈인가?</strong> 교과서적인 α2β2 4량체로, 574 잔기밖에 되지 않아 가볍습니다.
+      실제 생물학에서도 α-β 이량체가 먼저 형성된 후 두 이량체가 결합하여 4량체를 만듭니다 — 이 조립 과정을 애니메이션으로 재현합니다.
+    </div>
     <ol>
-      <li><strong>임포트</strong>: PDB ID <code>2HHB</code> → Download</li>
+      <li><strong>임포트</strong>: PDB ID <code>4HHB</code> → Download (574 잔기, 4체인)</li>
+      <li><strong>셰이딩 모드 전환</strong>: <strong>Material Preview</strong> (<kbd>Z</kbd> 키)</li>
       <li><strong>체인별 색상 지정</strong>:
         <table style="margin:0.5rem 0">
           <tr><th>체인</th><th>서브유닛</th><th>추천 색상</th></tr>
@@ -1066,13 +1073,13 @@
           <tr><td>C</td><td>α2</td><td>하늘색 (#7AB8E0)</td></tr>
           <tr><td>D</td><td>β2</td><td>분홍색 (#E07A7A)</td></tr>
         </table>
-        Outliner에서 체인 하나씩 선택 → 컬러 피커에서 색상 선택 (즉시 적용)
+        Protein Outliner에서 체인 하나씩 선택 → Visual Setup 컬러 피커에서 색상 선택 (즉시 적용)
       </li>
       <li><strong>Puppet 4개 생성</strong>: 각 체인을 개별 Puppet으로 생성
         <ul>
           <li>Chain A 선택 → Create Puppet → <code>alpha1</code></li>
           <li>Chain B 선택 → Create Puppet → <code>beta1</code></li>
-          <li>(C, D도 동일)</li>
+          <li>(C → <code>alpha2</code>, D → <code>beta2</code>도 동일)</li>
         </ul>
       </li>
       <li><strong>"조립된 상태" Pose 저장</strong>:
@@ -1100,118 +1107,122 @@
       </li>
       <li><kbd>Space</kbd>로 재생 → 4개 서브유닛이 날아와서 조립되는 애니메이션!</li>
     </ol>
+    <div class="note" style="margin-top:1rem">
+      <strong>NOTE</strong> Pose는 위치/회전/크기만 저장합니다. 색상은 Visual Setup에서 별도로 설정해야 합니다.
+    </div>
   </div>
 
   <!-- Example B-3 -->
   <div class="practice">
-    <h3>예제 B-3: SARS-CoV-2 프로테아제 — 활성 부위 줌인</h3>
-    <p style="color:var(--dim); margin-bottom:1rem">효소의 전체 구조를 보여준 후 활성 부위로 카메라가 줌인하는 애니메이션.</p>
+    <h3>예제 B-3: β2-아드레날린 수용체 + Gs 단백질 — GPCR 신호전달 복합체</h3>
+    <p style="color:var(--dim); margin-bottom:1rem">GPCR 신호전달 복합체의 5개 체인을 기능별로 색상 구분하고, 수용체-G단백질 접합면으로 카메라 줌인 애니메이션을 만듭니다.</p>
+    <div class="note" style="margin-bottom:1rem">
+      <strong>왜 3SN6인가?</strong> 2012년 노벨 화학상(Kobilka &amp; Lefkowitz)의 핵심 구조입니다.
+      GPCR인 β2-AR이 리간드(작용제)에 의해 활성화되면 세포 내 Gs 단백질과 결합하여 신호를 전달합니다.
+      5개 체인이 각각 다른 역할을 하므로 색상 구분만으로도 신호전달 메커니즘을 직관적으로 보여줄 수 있습니다.
+    </div>
     <ol>
-      <li><strong>임포트</strong>: PDB ID <code>6LU7</code> → Download</li>
-      <li><strong>시각화</strong>:
+      <li><strong>임포트</strong>: PDB ID <code>3SN6</code> → Download (1,318 잔기, 5체인)</li>
+      <li><strong>셰이딩 모드 전환</strong>: <strong>Material Preview</strong> (<kbd>Z</kbd> 키)</li>
+      <li><strong>체인별 색상 지정</strong>:
+        <table style="margin:0.5rem 0">
+          <tr><th>체인</th><th>정체</th><th>추천 색상</th><th>역할</th></tr>
+          <tr><td>A</td><td>Gα<sub>s</sub></td><td>주황색 (#E88D3F)</td><td>G단백질 α 서브유닛 (GTPase)</td></tr>
+          <tr><td>B</td><td>Gβ<sub>1</sub></td><td>초록색 (#50C878)</td><td>G단백질 β 서브유닛 (WD40 프로펠러)</td></tr>
+          <tr><td>C</td><td>Gγ<sub>2</sub></td><td>연두색 (#8FD68F)</td><td>G단백질 γ 서브유닛</td></tr>
+          <tr><td>D</td><td>β2-AR</td><td>파란색 (#4A90D9)</td><td>수용체 (7TM 나선 번들)</td></tr>
+          <tr><td>E</td><td>Nb35</td><td>연한 회색 (#B0B0B0)</td><td>나노바디 (결정화 보조 — 숨겨도 됨)</td></tr>
+        </table>
+        Protein Outliner에서 체인 하나씩 선택 → Visual Setup 컬러 피커에서 색상 적용
+      </li>
+      <li><strong>나노바디 숨기기 (선택사항)</strong>: Chain E(Nb35)는 결정화를 위한 보조 단백질입니다.<br>
+        Blender Outliner에서 해당 오브젝트의 <strong>눈 아이콘</strong>(👁) 클릭하여 숨기면 생물학적으로 의미 있는 구성만 보입니다.</li>
+      <li><strong>카메라 설정 — 전체 뷰</strong>:
         <ul>
-          <li>전체: Cartoon, 연한 회색 (#B0B0B0)</li>
-          <li>리간드(N3 억제제): Ball &amp; Stick, 노란색 (#FFD700)</li>
-          <li>활성 부위 잔기(His41, Cys145 근처 도메인): Cartoon, 초록색 (#50C878)</li>
+          <li>카메라를 복합체 전체가 보이는 위치에 배치 (<kbd>Numpad 0</kbd> → Lock Camera to View)</li>
+          <li>프레임 1: 카메라 선택 → <kbd>K</kbd> → <strong>Location</strong> 키프레임 삽입<br>
+            <em style="color:var(--dim)">※ 카메라는 Puppet이 아니므로 Blender 기본 <kbd>I</kbd> 키로도 삽입 가능</em></li>
         </ul>
       </li>
-      <li><strong>카메라 설정</strong>:
+      <li><strong>줌인 — 수용체-G단백질 접합면</strong>:
         <ul>
-          <li>카메라를 전체 구조가 보이는 원거리 위치에 배치</li>
-          <li>프레임 1: 카메라 위치 키프레임 (3D Viewport 위에서 <kbd>K</kbd> → Location)<br>
-            <em style="color:var(--dim)">※ 카메라는 Puppet이 아니므로 Blender 기본 <kbd>I</kbd> 키 사용</em></li>
+          <li>프레임 60: 카메라를 수용체(파란)와 Gα(주황)가 접촉하는 세포질 쪽 접합면으로 이동</li>
+          <li>카메라 뷰에서 접합면이 화면 중앙에 크게 보이도록 조정</li>
+          <li><kbd>K</kbd> → Location 키프레임 삽입</li>
         </ul>
       </li>
-      <li><strong>줌인 카메라 이동</strong>:
-        <ul>
-          <li>프레임 60: 카메라를 활성 부위 근처로 이동 (<kbd>G</kbd>로 전진)</li>
-          <li>카메라 뷰(<kbd>Numpad 0</kbd>)에서 리간드가 화면 중앙에 크게 보이도록 조정</li>
-          <li>3D Viewport 위에서 <kbd>K</kbd> → Location 키프레임 삽입</li>
-        </ul>
-      </li>
-      <li>프레임 60~120: 줌인 상태에서 카메라를 약간 회전하여 활성 부위를 다양한 각도로 보여줌</li>
+      <li>프레임 60~120: 줌인 상태에서 카메라를 약간 회전하여 접합면을 여러 각도로 보여줌</li>
       <li>Graph Editor에서 줌인 구간의 보간 곡선을 <strong>Ease-In</strong>으로 설정 → 자연스러운 감속</li>
     </ol>
     <div class="tip" style="margin-top:1rem">
-      <strong>카메라 Depth of Field(피사계 심도) 추가</strong>: Camera Properties → Depth of Field → Focus Object를 리간드로 설정 → F-Stop 0.5~2.0.
-      배경이 흐려지면서 활성 부위에 시선이 집중됩니다.
+      <strong>카메라 Depth of Field(피사계 심도) 추가</strong>: Camera Properties → Depth of Field → Focus Object를 수용체(Chain D)로 설정 → F-Stop 0.5~2.0.
+      배경의 G단백질이 살짝 흐려지면서 수용체에 시선이 집중됩니다.
+    </div>
+    <div class="warn" style="margin-top:0.5rem">
+      <strong>Chain D(β2-AR)에 대해:</strong> 이 구조에는 결정화를 위해 수용체의 ICL3(세포질 루프3)에 T4 lysozyme이 삽입되어 있습니다.
+      수용체 중간에 비-GPCR 구조가 보일 수 있으나, 이는 실험적 산물입니다.
     </div>
   </div>
 
   <!-- Example B-4 -->
   <div class="practice">
-    <h3>예제 B-4: 스파이크 단백질 — 도메인 분리 (Exploded View)</h3>
-    <p style="color:var(--dim); margin-bottom:1rem">SARS-CoV-2 스파이크의 3량체(trimer) 구조를 도메인별로 분리하는 교육용 애니메이션.</p>
+    <h3>예제 B-4: TRPV1 채널 — 막단백질 4량체 Exploded View</h3>
+    <p style="color:var(--dim); margin-bottom:1rem">캡사이신(고추 매운맛) 수용체 TRPV1의 4량체 구조를 서브유닛별로 분리하는 교육용 애니메이션.</p>
+    <div class="note" style="margin-bottom:1rem">
+      <strong>왜 TRPV1인가?</strong> 2013년 cryo-EM "resolution revolution"의 상징적 구조이며 (2021 노벨 생리의학상, Julius &amp; Patapoutian),
+      C4 대칭의 호모 4량체로 4개 서브유닛이 동일한 구조를 가집니다.
+      리간드가 없어 ProteinBlender만으로 깔끔하게 시각화할 수 있습니다.
+    </div>
     <ol>
-      <li><strong>임포트</strong>: PDB ID <code>6VYB</code> → Download (약 30~60초 소요, 큰 구조)</li>
-      <li><strong>3개 체인 색상 구분</strong>:
+      <li><strong>임포트</strong>: PDB ID <code>3J5P</code> → Download (~2,400 잔기, 4체인 — 약간 시간 소요)</li>
+      <li><strong>셰이딩 모드 전환</strong>: <strong>Material Preview</strong> (<kbd>Z</kbd> 키)</li>
+      <li><strong>4개 서브유닛 색상 구분</strong>:
+        <table style="margin:0.5rem 0">
+          <tr><th>체인</th><th>추천 색상</th></tr>
+          <tr><td>A</td><td>파란색 (#4A90D9)</td></tr>
+          <tr><td>B</td><td>초록색 (#50C878)</td></tr>
+          <tr><td>C</td><td>주황색 (#E88D3F)</td></tr>
+          <tr><td>D</td><td>보라색 (#9B59B6)</td></tr>
+        </table>
+        Protein Outliner에서 체인 선택 → Visual Setup 색상 적용
+      </li>
+      <li><strong>Puppet 4개 생성</strong>: 각 서브유닛을 개별 Puppet으로 생성
         <ul>
-          <li>Chain A: 초록색, Chain B: 주황색, Chain C: 보라색</li>
-          <li>각 체인을 Outliner에서 선택 → 색상 적용</li>
+          <li>Chain A → <code>subunit_A</code>, Chain B → <code>subunit_B</code>, (C, D 동일)</li>
         </ul>
       </li>
-      <li><strong>Puppet 생성</strong>: 각 체인(모노머)을 개별 Puppet으로 생성</li>
       <li><strong>Pose 2개 저장</strong>:
         <ul>
-          <li><code>Trimer_Intact</code>: 원래 위치 그대로</li>
-          <li>각 Puppet을 중심에서 바깥으로 <kbd>G</kbd> → 방사형으로 이동</li>
-          <li><code>Trimer_Separated</code>: 분리된 위치 저장</li>
+          <li><code>Tetramer_Intact</code>: 원래 위치 그대로 저장</li>
+          <li>각 Puppet을 채널 중심에서 <strong>방사형으로</strong> 바깥으로 이동 (<kbd>G</kbd> → 축 지정):
+            <br><code>subunit_A</code>: <kbd>G</kbd> → <kbd>X</kbd> → <code>5</code>
+            / <code>subunit_B</code>: <kbd>G</kbd> → <kbd>X</kbd> → <code>-5</code>
+            / <code>subunit_C</code>: <kbd>G</kbd> → <kbd>Y</kbd> → <code>5</code>
+            / <code>subunit_D</code>: <kbd>G</kbd> → <kbd>Y</kbd> → <code>-5</code></li>
+          <li><code>Tetramer_Exploded</code>: 분리 위치 저장</li>
         </ul>
       </li>
       <li><strong>타임라인 구성</strong>:
         <table style="margin:0.5rem 0">
           <tr><th>프레임</th><th>상태</th><th>설명</th></tr>
-          <tr><td>1~30</td><td>Trimer_Intact</td><td>전체 구조를 보여줌</td></tr>
-          <tr><td>30~90</td><td>전환</td><td>3개 모노머가 서서히 분리됨</td></tr>
-          <tr><td>90~150</td><td>Trimer_Separated</td><td>분리 상태에서 회전하며 각 모노머 확인</td></tr>
+          <tr><td>1~30</td><td>Tetramer_Intact</td><td>완전체 채널 구조를 보여줌</td></tr>
+          <tr><td>30~90</td><td>전환</td><td>4개 서브유닛이 서서히 분리됨</td></tr>
+          <tr><td>90~150</td><td>Tetramer_Exploded</td><td>분리 상태에서 회전하며 각 서브유닛 관찰</td></tr>
           <tr><td>150~210</td><td>전환</td><td>다시 합쳐짐</td></tr>
-          <tr><td>210~240</td><td>Trimer_Intact</td><td>마무리</td></tr>
+          <tr><td>210~240</td><td>Tetramer_Intact</td><td>마무리</td></tr>
         </table>
       </li>
-      <li>각 전환 구간의 시작/끝에 키프레임 삽입</li>
+      <li>각 전환 구간의 시작/끝에 <strong>"Create Keyframe"</strong> 삽입</li>
     </ol>
     <div class="warn" style="margin-top:1rem">
-      스파이크 단백질은 약 3,000+ 잔기로 무겁습니다.
-      EEVEE 엔진으로 프리뷰하고, 뷰포트 셰이딩을 <strong>Solid</strong>로 유지하면 작업이 훨씬 빠릅니다.
-      최종 렌더링만 Cycles + Material Preview로 전환하세요.
+      <strong>대형 구조 성능 팁:</strong> TRPV1은 ~2,400 잔기 / ~18,000 원자로 뷰포트가 느려질 수 있습니다.
+      <ul style="margin:0.3rem 0 0 1rem">
+        <li>작업 중에는 뷰포트 셰이딩을 <strong>Solid</strong>로 유지 (Material Preview보다 훨씬 빠름)</li>
+        <li>Representation을 <strong>Ribbon</strong>으로 설정하면 Cartoon보다 가벼움</li>
+        <li>최종 렌더링만 Material Preview 또는 Cycles로 전환</li>
+        <li>EEVEE 렌더 엔진이 Cycles보다 빠름 (품질 vs 속도 트레이드오프)</li>
+      </ul>
     </div>
-  </div>
-
-  <!-- Example B-5 -->
-  <div class="practice">
-    <h3>예제 B-5: OpenFold3 예측 구조 — pLDDT 신뢰도 시각화</h3>
-    <p style="color:var(--dim); margin-bottom:1rem">OpenFold3-MLX로 예측한 구조를 임포트하여 신뢰도에 따른 색상을 부여하고 논문 이미지를 생성합니다.</p>
-    <ol>
-      <li><strong>구조 예측</strong>: OpenFold3-MLX GUI 또는 CLI로 시퀀스 예측 실행
-        <ul>
-          <li>결과 파일: <code>output/prediction.pdb</code> (B-factor 컬럼에 pLDDT 점수 저장됨)</li>
-        </ul>
-      </li>
-      <li><strong>임포트</strong>: Protein Import 패널 → 폴더 아이콘 → <code>prediction.pdb</code> 선택</li>
-      <li><strong>pLDDT 색상 스킴 적용</strong>: Domain Maker로 신뢰도 구간별 도메인 분할 → 각 도메인에 색상 수동 지정
-        <table style="margin:0.5rem 0">
-          <tr><th>pLDDT 범위</th><th>의미</th><th>색상</th><th>Hex</th></tr>
-          <tr><td>&gt; 90</td><td>매우 높은 신뢰도</td><td>진한 파란색</td><td><code>#0053D6</code></td></tr>
-          <tr><td>70 ~ 90</td><td>높은 신뢰도</td><td>하늘색</td><td><code>#65CBF3</code></td></tr>
-          <tr><td>50 ~ 70</td><td>낮은 신뢰도</td><td>노란색</td><td><code>#FFDB13</code></td></tr>
-          <tr><td>&lt; 50</td><td>매우 낮은 신뢰도</td><td>주황색</td><td><code>#FF7D45</code></td></tr>
-        </table>
-        (이 색상은 AlphaFold DB 공식 컬러 스킴과 동일)
-      </li>
-      <li><strong>비교 이미지 제작</strong>:
-        <ul>
-          <li>같은 구조를 두 번 임포트 → 하나는 Cartoon, 하나는 Surface</li>
-          <li>나란히 배치하여 2D 구조 vs 3D 표면을 동시에 보여줌</li>
-        </ul>
-      </li>
-      <li><strong>논문용 정적 이미지 렌더링</strong>:
-        <ul>
-          <li>카메라 앵글 잡기 → <kbd>Numpad 0</kbd>으로 확인</li>
-          <li>Render → Render Image (<kbd>F12</kbd>) → Image → Save As로 PNG 저장</li>
-          <li>해상도: 최소 300 DPI (3000x2000 px 이상 권장)</li>
-        </ul>
-      </li>
-    </ol>
   </div>
 </section>
 
@@ -1401,7 +1412,7 @@
           <li>pLDDT &gt; 70이면 신뢰할 수 있는 구조</li>
         </ul>
       </li>
-      <li><strong>Blender 작업</strong>: 위 예제 B-5 참고</li>
+      <li><strong>Blender 작업</strong>: Protein Import로 로컬 <code>.pdb</code> 파일 임포트 → Visual Setup으로 스타일/색상 적용 → 렌더링</li>
     </ol>
   </div>
 </section>
@@ -1425,11 +1436,10 @@
       <tr><th>PDB ID</th><th>단백질</th><th>크기</th><th>특징</th></tr>
       <tr><td><code>1CRN</code></td><td>크램빈</td><td>46 잔기</td><td>최소 크기, 빠른 테스트용</td></tr>
       <tr><td><code>1UBQ</code></td><td>유비퀴틴</td><td>76 잔기</td><td>단일 도메인, 알파+베타 구조</td></tr>
-      <tr><td><code>1MBO</code></td><td>미오글로빈</td><td>153 잔기</td><td>단일 체인, 도메인 분할 연습. <em style="color:var(--dim)">※ 1MB"O"(알파벳 O), 숫자 0 아님</em></td></tr>
-      <tr><td><code>2HHB</code></td><td>헤모글로빈</td><td>574 잔기 (4체인)</td><td>멀티 체인 복합체</td></tr>
-      <tr><td><code>1HHO</code></td><td>디옥시 헤모글로빈</td><td>574 잔기 (4체인)</td><td>2HHB와 비교 → Oxy/Deoxy 전환</td></tr>
-      <tr><td><code>6LU7</code></td><td>SARS-CoV-2 Mpro</td><td>306 잔기</td><td>리간드 복합체, 약물 설계 교육</td></tr>
-      <tr><td><code>6VYB</code></td><td>SARS-CoV-2 스파이크</td><td>~3,300 잔기</td><td>대형 3량체, 도메인 분리 예제</td></tr>
+      <tr><td><code>2SRC</code></td><td>c-Src 키나제</td><td>450 잔기</td><td><strong>예제 B-1</strong>. 단일 체인, SH3/SH2/Kinase 3도메인 분할</td></tr>
+      <tr><td><code>4HHB</code></td><td>헤모글로빈</td><td>574 잔기 (4체인)</td><td><strong>예제 B-2</strong>. α2β2 4량체 복합체, 조립 애니메이션</td></tr>
+      <tr><td><code>3SN6</code></td><td>β2-AR + Gs</td><td>1,318 잔기 (5체인)</td><td><strong>예제 B-3</strong>. GPCR 신호전달 복합체, 노벨상 구조</td></tr>
+      <tr><td><code>3J5P</code></td><td>TRPV1</td><td>~2,400 잔기 (4체인)</td><td><strong>예제 B-4</strong>. 막단백질 4량체, cryo-EM 구조</td></tr>
       <tr><td><code>3J3Q</code></td><td>리보솜 (80S)</td><td>~15,000+ 잔기</td><td>초대형, 성능 테스트용</td></tr>
       <tr><td><code>7BBV</code></td><td>GFP (녹색형광단백질)</td><td>238 잔기</td><td>베타 배럴 구조, 형광 교육</td></tr>
       <tr><td><code>1BNA</code></td><td>B-DNA 이중나선</td><td>핵산</td><td>DNA 구조 시각화</td></tr>
