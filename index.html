@@ -1030,19 +1030,17 @@
         <ul>
           <li>Protein Outliner에서 <strong>Chain A</strong> 선택</li>
           <li><strong>Domain Maker</strong> 패널 열기 (선택한 체인이 있어야 표시됨)</li>
-          <li>첫 번째 분할 — <strong>SH3 도메인</strong>: "Split Chain" 버튼 → 잔기 범위 <code>84~145</code> 지정<br>
-            <em style="color:var(--dim)">→ 3개 도메인 자동 생성: N-terminal(~83) / SH3(84~145) / 나머지(146~)</em></li>
-          <li>두 번째 분할 — 나머지 도메인에서 <strong>SH2</strong> 분리: 나머지 도메인 선택 → "Split Chain" → 잔기 범위 <code>151~248</code> 지정<br>
-            <em style="color:var(--dim)">→ 링커(146~150) / SH2(151~248) / Kinase(249~) 으로 분할</em></li>
+          <li>첫 번째 분할 — <strong>SH3 도메인</strong>: "Split Chain" 버튼 → 잔기 범위 <code>86~145</code> 지정<br>
+            <em style="color:var(--dim)">→ 이 구조는 잔기 86번부터 시작합니다 (N-terminal unique domain은 포함되어 있지 않음)</em></li>
+          <li>두 번째 분할 — 나머지 도메인에서 <strong>SH2</strong> 분리: 나머지 도메인 선택 → "Split Chain" → 잔기 범위 <code>151~248</code> 지정</li>
         </ul>
       </li>
       <li><strong>도메인별 색상 적용</strong>:
         <table style="margin:0.5rem 0">
           <tr><th>도메인</th><th>잔기 범위</th><th>추천 색상</th><th>기능</th></tr>
-          <tr><td>SH3</td><td>84 ~ 145</td><td>초록색 (#50C878)</td><td>프롤린-리치 모티프 인식</td></tr>
+          <tr><td>SH3</td><td>86 ~ 145</td><td>초록색 (#50C878)</td><td>프롤린-리치 모티프 인식</td></tr>
           <tr><td>SH2</td><td>151 ~ 248</td><td>주황색 (#E88D3F)</td><td>인산화 티로신 결합</td></tr>
-          <tr><td>Kinase</td><td>270 ~ 523</td><td>파란색 (#4A90D9)</td><td>촉매 도메인 (N-lobe + C-lobe)</td></tr>
-          <tr><td>링커/N-tail</td><td>나머지</td><td>연한 회색 (#B0B0B0)</td><td>연결 부위</td></tr>
+          <tr><td>Kinase</td><td>249 ~ 536</td><td>파란색 (#4A90D9)</td><td>촉매 도메인 (링커 + N-lobe + C-lobe)</td></tr>
         </table>
         Protein Outliner에서 각 도메인 체크박스 선택 → Visual Setup 컬러 피커에서 색상 변경 (즉시 적용)
       </li>
@@ -1133,7 +1131,9 @@
           <tr><td>D</td><td>β2-AR</td><td>파란색 (#4A90D9)</td><td>수용체 (7TM 나선 번들)</td></tr>
           <tr><td>E</td><td>Nb35</td><td>연한 회색 (#B0B0B0)</td><td>나노바디 (결정화 보조 — 숨겨도 됨)</td></tr>
         </table>
-        Protein Outliner에서 체인 하나씩 선택 → Visual Setup 컬러 피커에서 색상 적용
+        Protein Outliner에서 체인 하나씩 선택 → Visual Setup 컬러 피커에서 색상 적용<br>
+        <em style="color:var(--dim)">※ 위 체인 ID(A~E)는 RCSB 표준 라벨 기준입니다. PDB 원본(author) ID는 A, B, G, R, N으로 다릅니다.
+        ProteinBlender에서 표시되는 체인명이 다를 경우 각 체인의 크기와 형태로 구분하세요.</em>
       </li>
       <li><strong>나노바디 숨기기 (선택사항)</strong>: Chain E(Nb35)는 결정화를 위한 보조 단백질입니다.<br>
         Blender Outliner에서 해당 오브젝트의 <strong>눈 아이콘</strong>(👁) 클릭하여 숨기면 생물학적으로 의미 있는 구성만 보입니다.</li>
